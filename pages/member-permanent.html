@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>স্থায়ী সদস্য ফরম | KYBDF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* ফরমের জন্য অতিরিক্ত স্টাইল */
+        .form-header{
+            text-align: center;
+            padding: 40px 20px 25px;
+            margin: 20px 0 20px;
+            background: rgba(255,255,245,0.55);
+            backdrop-filter: blur(12px);
+            border-radius: 80px;
+        }
+        .form-header h1{
+            font-size: 2.2rem;
+            background: linear-gradient(125deg, #c62828, #f39c12, #1b5e20);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .form-header p{
+            margin-top: 12px;
+            background: rgba(255,255,210,0.8);
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 40px;
+            color: #1b5e20;
+            font-weight: 500;
+        }
+        .glass-card{
+            background: rgba(255,255,250,0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 55px;
+            padding: 35px 30px;
+            margin: 30px 0 50px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255,250,210,0.7);
+        }
+        .form-row{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+        .form-field{
+            margin-bottom: 20px;
+        }
+        .form-field label{
+            font-weight: 600;
+            color: #1b5e20;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+        .form-field label i{
+            width: 24px;
+            color: #c62828;
+        }
+        .form-field input, .form-field select, .form-field textarea{
+            width: 100%;
+            padding: 12px 18px;
+            background: #fffffff2;
+            border: 1px solid #cfe2cf;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .form-field input:focus, .form-field select:focus, .form-field textarea:focus{
+            outline: none;
+            border-color: #c62828;
+            box-shadow: 0 0 0 3px rgba(198,40,40,0.1);
+        }
+        .form-field textarea{
+            border-radius: 25px;
+            resize: vertical;
+        }
+        .full-width{
+            grid-column: span 2;
+        }
+        .photo-upload{
+            background: #f4fcf4;
+            border-radius: 50px;
+            padding: 10px 20px;
+            border: 1px dashed #c62828;
+        }
+        .submit-btn{
+            background: linear-gradient(115deg, #c62828, #1b5e20);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            transition: 0.25s;
+            width: 100%;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+        }
+        .submit-btn:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 12px 22px rgba(0,0,0,0.15);
+        }
+        .info-note{
+            background: #fff3cf;
+            border-radius: 40px;
+            padding: 12px 20px;
+            margin-top: 25px;
+            font-size: 0.8rem;
+            text-align: center;
+            color: #2c5e2c;
+        }
+        @media (max-width: 780px){
+            .form-row{ grid-template-columns: 1fr; }
+            .full-width{ grid-column: span 1; }
+            .form-header h1{ font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body class="lang-bn">
+
+<div class="top-header" id="topHeader"></div>
+
+<div class="logo-social-bar">
+    <div class="container logo-social-flex">
+        <div class="logo-area">
+            <img src="../images/logo.png" alt="KYBDF Logo" onerror="this.src='https://via.placeholder.com/70?text=KYBDF'">
+            <div class="logo-text">
+                <h1 class="bn-name">কলমাকান্দা যুব রক্তদান ফাউন্ডেশন</h1>
+                <p class="en-name">Kalmakanda Youth Blood Donate Foundation (KYBDF)</p>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="social-icons">
+                <a href="https://www.facebook.com/blood.kybdf" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/groups/kbdf.bd" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/8801736567620" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://youtube.com/@kybdf23" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/kybdfbd" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:kalmakandaybdf@gmail.com" target="_blank"><i class="far fa-envelope"></i></a>
+            </div>
+            <div class="language-switch">
+                <button class="lang-option active" data-lang="bn">বাংলা</button>
+                <button class="lang-option" data-lang="en">English</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar">
+    <div class="container nav-flex">
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+        <ul class="nav-menu">
+            <li><a href="../index.html">হোম</a></li>
+            <li><a href="about.html">আমাদের সম্পর্কে</a></li>
+            <li><a href="activities.html">কার্যক্রম</a></li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">পরিষদ <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="advisors.html">উপদেষ্টা পরিষদ</a></li><li><a href="governing-body.html">পরিচালনা পরিষদ</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">কমিটি <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="central-committee.html">কেন্দ্রীয় কমিটি</a></li>
+                    <li class="dropdown-submenu"><a href="#">ইউনিয়ন কমিটি <i class="fas fa-chevron-right"></i></a>
+                        <ul class="submenu"><li><a href="union-kalmakanda.html">কলমাকান্দা সদর ইউনিয়ন</a></li><li><a href="union-nazirpur.html">নাজিরপুর ইউনিয়ন</a></li><li><a href="union-pogla.html">পোগলা ইউনিয়ন</a></li><li><a href="union-borkhapn.html">বড়খাপন ইউনিয়ন</a></li><li><a href="union-lengura.html">লেঙ্গুড়া ইউনিয়ন</a></li><li><a href="union-kailati.html">কৈলাটি ইউনিয়ন</a></li><li><a href="union-khornai.html">খারনৈ ইউনিয়ন</a></li><li><a href="union-rangchati.html">রংছাতি ইউনিয়ন</a></li></ul>
+                    </li>
+                    <li class="dropdown-submenu"><a href="#">আঞ্চলিক কমিটি <i class="fas fa-chevron-right"></i></a>
+                        <ul class="submenu"><li><a href="regional-north.html">কলমাকান্দা উত্তর</a></li><li><a href="regional-south.html">কলমাকান্দা দক্ষিণ</a></li><li><a href="regional-west.html">কলমাকান্দা পশ্চিম</a></li></ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle active">সদস্য ফরম <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="member-permanent.html" class="active">স্থায়ী সদস্য ফরম</a></li><li><a href="member-general.html">সাধারণ সদস্য ফরম</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">সদস্য তালিকা <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="permanent-members.html">স্থায়ী সদস্য</a></li><li><a href="general-members.html">সাধারণ সদস্য</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">মিডিয়া <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="gallery.html">গ্যালারি</a></li><li><a href="news.html">নিউজ</a></li><li><a href="videos.html">ভিডিও</a></li></ul>
+            </li>
+            <li><a href="blood-donation.html">রক্তদান</a></li>
+            <li><a href="notice.html">নোটিশ</a></li>
+            <li><a href="donation.html">ডোনেশন</a></li>
+            <li><a href="contact.html">যোগাযোগ</a></li>
+            <li><a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> লগইন</a></li>
+        </ul>
+        <button class="more-btn">আরও <i class="fas fa-chevron-down"></i></button>
+        <ul class="more-dropdown"></ul>
+    </div>
+</nav>
+
+<main>
+    <div class="container">
+        <div class="form-header">
+            <h1><i class="fas fa-star-of-life"></i> স্থায়ী সদস্য ফরম <i class="fas fa-hand-holding-heart"></i></h1>
+          
+        </div>
+
+        <div class="glass-card">
+            <form id="permanentMemberForm">
+                <div class="form-row">
+                    <div class="form-field"><label><i class="fas fa-user"></i> বাংলা নাম *</label><input type="text" id="bnName" placeholder="আপনার বাংলা নাম" required></div>
+                    <div class="form-field"><label><i class="fas fa-user"></i> ইংরেজি নাম *</label><input type="text" id="enName" placeholder="English Name" required></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-field"><label><i class="fas fa-father"></i> পিতার নাম *</label><input type="text" id="father" placeholder="পিতার পুরো নাম" required></div>
+                    <div class="form-field"><label><i class="fas fa-mother"></i> মাতার নাম *</label><input type="text" id="mother" placeholder="মাতার পুরো নাম" required></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-field"><label><i class="fas fa-map-marker-alt"></i> স্থায়ী ঠিকানা *</label><input type="text" id="permanentAddress" placeholder="গ্রাম, ওয়ার্ড, পোস্ট, উপজেলা, জেলা" required></div>
+                    <div class="form-field"><label><i class="fas fa-location-dot"></i> বর্তমান ঠিকানা</label><input type="text" id="presentAddress" placeholder="যদি ভিন্ন হয়"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-field"><label><i class="fas fa-calendar-alt"></i> জন্ম তারিখ *</label><input type="date" id="dob" required></div>
+                    <div class="form-field"><label><i class="fas fa-tint"></i> রক্তের গ্রুপ *</label>
+                        <select id="bloodGroup" required>
+                            <option value="">নির্বাচন করুন</option>
+                            <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+                            <option>O+</option><option>O-</option><option>AB+</option><option>AB-</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-field"><label><i class="fas fa-calendar-check"></i> শেষ রক্তদানের তারিখ</label><input type="date" id="lastDonation"></div>
+                    <div class="form-field"><label><i class="fas fa-chart-line"></i> মোট রক্তদান (বার)</label><input type="number" id="totalDonation" placeholder="যতবার রক্ত দিয়েছেন"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-field"><label><i class="fas fa-id-card"></i> জাতীয় পরিচয়পত্র নং</label><input type="text" id="nid" placeholder="ঐচ্ছিক"></div>
+                    <div class="form-field"><label><i class="fas fa-baby-carriage"></i> জন্ম নিবন্ধন নং</label><input type="text" id="birthReg" placeholder="ঐচ্ছিক"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-field"><label><i class="fas fa-briefcase"></i> পেশা *</label><input type="text" id="occupation" placeholder="ছাত্র/চাকরিজীবী/ব্যবসায়ী" required></div>
+                    <div class="form-field"><label><i class="fas fa-phone-alt"></i> মোবাইল নম্বর *</label><input type="tel" id="mobile" placeholder="০১XXXXXXXXX" required></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-field"><label><i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ</label><input type="tel" id="whatsapp" placeholder="০১XXXXXXXXX"></div>
+                    <div class="form-field"><label><i class="fas fa-envelope"></i> ই-মেইল</label><input type="email" id="email" placeholder="example@gmail.com"></div>
+                </div>
+                <div class="form-field"><label><i class="fas fa-question-circle"></i> কিভাবে সংগঠন সম্পর্কে জানলেন?</label><textarea rows="2" id="knowFrom" placeholder="ফেসবুক/বন্ধু/ইভেন্ট ইত্যাদি"></textarea></div>
+                <div class="form-field photo-upload"><label><i class="fas fa-camera"></i> আপনার ছবি (জেপিজি/পিএনজি)</label><input type="file" id="photo" accept="image/*"></div>
+                <div class="form-field full-width"><label><i class="fas fa-signature"></i> আবেদনকারীর স্বাক্ষর (টাইপ করুন)</label><input type="text" id="signature" placeholder="আপনার পুরো নাম টাইপ করুন" required></div>
+                
+                <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> আবেদন জমা দিন</button>
+                <div id="formMsg" class="info-note" style="display:none;"></div>
+            </form>
+            <div class="info-note">
+                <i class="fas fa-info-circle"></i> গঠনতন্ত্রের ধারা ৭.১ ও ১৩.১: আবেদনকারীর বয়স ১৮+ হতে হবে, মাদকমুক্ত ও নিয়মিত রক্তদাতা। আবেদন জমা দিলে আপনার তথ্য সংরক্ষিত হবে এবং সদস্য নির্বাচন প্রক্রিয়া শুরু হবে।
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div><h4>কলমাকান্দা যুব রক্তদান ফাউন্ডেশন</h4><p>একটি অরাজনৈতিক স্বেচ্ছাসেবী রক্তদান ও সামাজিক সংগঠন</p></div>
+            <div><h4>যোগাযোগ</h4><p><i class="fas fa-phone"></i> ০১৭৩৬-৫৬৭৬২০<br><i class="fab fa-whatsapp"></i> ০১৭৩৬-৫৬৭৬২০<br><i class="far fa-envelope"></i> kalmakandaybdf@gmail.com</p></div>
+            <div><h4>প্রধান কার্যালয়</h4><p>কলমাকান্দা সদর, নেত্রকোণা</p></div>
+        </div>
+        <div class="copyright"><p>&copy; ২০২৩-২০২৬ KYBDF | সর্বস্বত্ব সংরক্ষিত | Developed by: Tanvir Rahman Shipu</p></div>
+    </div>
+</footer>
+
+<script src="../js/script.js"></script>
+<script src="../js/translation.js"></script>
+<script>
+    document.getElementById('permanentMemberForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = {
+            type: 'permanent',
+            bnName: document.getElementById('bnName').value,
+            enName: document.getElementById('enName').value,
+            father: document.getElementById('father').value,
+            mother: document.getElementById('mother').value,
+            permanentAddress: document.getElementById('permanentAddress').value,
+            presentAddress: document.getElementById('presentAddress').value,
+            dob: document.getElementById('dob').value,
+            bloodGroup: document.getElementById('bloodGroup').value,
+            lastDonation: document.getElementById('lastDonation').value,
+            totalDonation: document.getElementById('totalDonation').value,
+            nid: document.getElementById('nid').value,
+            birthReg: document.getElementById('birthReg').value,
+            occupation: document.getElementById('occupation').value,
+            mobile: document.getElementById('mobile').value,
+            whatsapp: document.getElementById('whatsapp').value,
+            email: document.getElementById('email').value,
+            knowFrom: document.getElementById('knowFrom').value,
+            signature: document.getElementById('signature').value,
+            date: new Date().toLocaleDateString('bn-BD')
+        };
+        // ছবি আপলোড (সিমুলেট - আসল ছবি সেভ না করলেও ফর্ম সেভ হবে)
+        let members = JSON.parse(localStorage.getItem('kybdf_members') || '[]');
+        members.unshift(formData);
+        localStorage.setItem('kybdf_members', JSON.stringify(members));
+        const msgDiv = document.getElementById('formMsg');
+        msgDiv.style.display = 'block';
+        msgDiv.innerHTML = '<i class="fas fa-check-circle"></i> ✅ আপনার আবেদন সফলভাবে জমা হয়েছে। আমরা শীঘ্রই যোগাযোগ করব।';
+        this.reset();
+        setTimeout(() => msgDiv.style.display = 'none', 5000);
+    });
+</script>
+</body>
+</html>

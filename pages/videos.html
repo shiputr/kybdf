@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ভিডিও গ্যালারি | KYBDF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .video-card {
+            background: linear-gradient(145deg, #ffffff, #fafefa);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+        .video-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .video-info {
+            padding: 18px;
+        }
+        .video-info h3 {
+            color: #1b5e20;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        .video-info p {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        .video-date {
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 8px;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+            grid-column: 1 / -1;
+        }
+        .empty-state i {
+            font-size: 60px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body class="lang-bn">
+
+<div class="top-header" id="topHeader"></div>
+
+<div class="logo-social-bar">
+    <div class="container logo-social-flex">
+        <div class="logo-area">
+            <img src="../images/logo.png" alt="KYBDF Logo" onerror="this.src='https://via.placeholder.com/70?text=KYBDF'">
+            <div class="logo-text">
+                <h1 class="bn-name">কলমাকান্দা যুব রক্তদান ফাউন্ডেশন</h1>
+                <p class="en-name">Kalmakanda Youth Blood Donate Foundation (KYBDF)</p>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="social-icons">
+                <a href="https://www.facebook.com/blood.kybdf" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/groups/kbdf.bd" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/8801736567620" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://youtube.com/@kybdf23" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/kybdfbd" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:kalmakandaybdf@gmail.com" target="_blank"><i class="far fa-envelope"></i></a>
+            </div>
+            <div class="language-switch">
+                <button class="lang-option active" data-lang="bn">বাংলা</button>
+                <button class="lang-option" data-lang="en">English</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar">
+    <div class="container nav-flex">
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+        <ul class="nav-menu">
+            <li><a href="../index.html">হোম</a></li>
+            <li><a href="about.html">আমাদের সম্পর্কে</a></li>
+            <li><a href="activities.html">কার্যক্রম</a></li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">পরিষদ <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="advisors.html">উপদেষ্টা পরিষদ</a></li><li><a href="governing-body.html">পরিচালনা পরিষদ</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">কমিটি <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="central-committee.html">কেন্দ্রীয় কমিটি</a></li>
+                    <li class="dropdown-submenu"><a href="#">ইউনিয়ন কমিটি <i class="fas fa-chevron-right"></i></a>
+                        <ul class="submenu"><li><a href="union-kalmakanda.html">কলমাকান্দা সদর ইউনিয়ন</a></li><li><a href="union-nazirpur.html">নাজিরপুর ইউনিয়ন</a></li><li><a href="union-pogla.html">পোগলা ইউনিয়ন</a></li><li><a href="union-borkhapn.html">বড়খাপন ইউনিয়ন</a></li><li><a href="union-lengura.html">লেঙ্গুড়া ইউনিয়ন</a></li><li><a href="union-kailati.html">কৈলাটি ইউনিয়ন</a></li><li><a href="union-khornai.html">খারনৈ ইউনিয়ন</a></li><li><a href="union-rangchati.html">রংছাতি ইউনিয়ন</a></li></ul>
+                    </li>
+                    <li class="dropdown-submenu"><a href="#">আঞ্চলিক কমিটি <i class="fas fa-chevron-right"></i></a>
+                        <ul class="submenu"><li><a href="regional-north.html">কলমাকান্দা উত্তর</a></li><li><a href="regional-south.html">কলমাকান্দা দক্ষিণ</a></li><li><a href="regional-west.html">কলমাকান্দা পশ্চিম</a></li></ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">সদস্য ফরম <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="member-permanent.html">স্থায়ী সদস্য ফরম</a></li><li><a href="member-general.html">সাধারণ সদস্য ফরম</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">সদস্য তালিকা <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="permanent-members.html">স্থায়ী সদস্য</a></li><li><a href="general-members.html">সাধারণ সদস্য</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">মিডিয়া <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="gallery.html">গ্যালারি</a></li><li><a href="news.html">নিউজ</a></li><li><a href="videos.html" class="active">ভিডিও</a></li></ul>
+            </li>
+            <li><a href="blood-donation.html">রক্তদান</a></li>
+            <li><a href="notice.html">নোটিশ</a></li>
+            <li><a href="donation.html">ডোনেশন</a></li>
+            <li><a href="contact.html">যোগাযোগ</a></li>
+            <li><a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> লগইন</a></li>
+        </ul>
+        <button class="more-btn">আরও <i class="fas fa-chevron-down"></i></button>
+        <ul class="more-dropdown"></ul>
+    </div>
+</nav>
+
+<main>
+    <div class="container">
+        <div class="page-header">
+            <h1>ভিডিও গ্যালারি</h1>
+            <p>আমাদের কার্যক্রম, সচেতনতামূলক ভিডিও ও সাফল্যের গল্প</p>
+        </div>
+        
+        <div class="video-grid" id="videosGrid">
+            <div class="empty-state">
+                <i class="fas fa-video-slash"></i>
+                <p>কোনো ভিডিও নেই</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div><h4>কলমাকান্দা যুব রক্তদান ফাউন্ডেশন</h4><p>একটি অরাজনৈতিক স্বেচ্ছাসেবী রক্তদান ও সামাজিক সংগঠন</p></div>
+            <div><h4>যোগাযোগ</h4><p><i class="fas fa-phone"></i> ০১৭৩৬-৫৬৭৬২০<br><i class="fab fa-whatsapp"></i> ০১৭৩৬-৫৬৭৬২০<br><i class="far fa-envelope"></i> kalmakandaybdf@gmail.com</p></div>
+            <div><h4>প্রধান কার্যালয়</h4><p>কলমাকান্দা সদর, নেত্রকোণা</p></div>
+        </div>
+        <div class="copyright"><p>&copy; ২০২৩-২০২৬ KYBDF | সর্বস্বত্ব সংরক্ষিত | Developed by: Tanvir Rahman Shipu</p></div>
+    </div>
+</footer>
+
+<script src="../js/script.js"></script>
+<script>
+    function loadVideos() {
+        const videos = JSON.parse(localStorage.getItem('kybdf_videos') || '[]');
+        const container = document.getElementById('videosGrid');
+        
+        if (videos.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-video-slash"></i>
+                    <p>কোনো ভিডিও নেই</p>
+                </div>
+            `;
+            return;
+        }
+        
+        container.innerHTML = videos.map((video) => `
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="${escapeHtml(video.url)}" title="${escapeHtml(video.title)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>${escapeHtml(video.title)}</h3>
+                    <div class="video-date"><i class="fas fa-calendar-alt"></i> যোগ হয়েছে: ${video.date}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    loadVideos();
+</script>
+</body>
+</html>

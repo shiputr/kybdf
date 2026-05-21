@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আমাদের কার্যক্রম | KYBDF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* ইউনিক ডিজাইন - about.html এর সাথে মিল রেখে */
+        .activities-hero {
+            background: linear-gradient(135deg, #f8fff8, #eef5ee);
+            border-radius: 50px;
+            padding: 50px 30px;
+            text-align: center;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .activities-hero::before {
+            content: "🎯";
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 120px;
+            opacity: 0.05;
+            transform: rotate(-15deg);
+        }
+        .activities-hero h2 {
+            font-size: 2rem;
+            color: #1b5e20;
+            margin-bottom: 15px;
+        }
+        .activities-hero p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* ট্যাব মেনু */
+        .activities-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0 30px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: transparent;
+            border: 2px solid #c62828;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #c62828;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .tab-btn:hover {
+            background: #c62828;
+            color: white;
+            transform: translateY(-3px);
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #c62828, #1b5e20);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 5px 15px rgba(198,40,40,0.3);
+        }
+        
+        /* ট্যাব কন্টেন্ট */
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        .tab-content.active-tab {
+            display: block;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* সাবজেক্ট গ্রিড (গ্যালারি সিস্টেম) */
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .subject-card {
+            background: linear-gradient(145deg, #ffffff, #fafefa);
+            border-radius: 35px;
+            padding: 30px 25px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(198, 40, 40, 0.05), transparent);
+            transition: 0.5s;
+            opacity: 0;
+        }
+        .subject-card:hover::before {
+            opacity: 1;
+        }
+        .subject-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.12);
+        }
+        .subject-icon {
+            font-size: 55px;
+            background: linear-gradient(135deg, #c62828, #1b5e20);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .subject-card:hover .subject-icon {
+            transform: scale(1.1);
+        }
+        .subject-title {
+            color: #1b5e20;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .subject-short-desc {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        
+        /* মডাল স্টাইল (বড় আকারে বিস্তারিত দেখানোর জন্য) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            overflow: auto;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: linear-gradient(145deg, #ffffff, #fafefa);
+            margin: 50px auto;
+            padding: 35px;
+            border-radius: 40px;
+            width: 90%;
+            max-width: 700px;
+            position: relative;
+            animation: modalZoomIn 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        @keyframes modalZoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #c62828;
+            cursor: pointer;
+            background: #f0f0f0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .close-modal:hover {
+            background: #c62828;
+            color: white;
+            transform: rotate(90deg);
+        }
+        .modal-icon {
+            font-size: 70px;
+            background: linear-gradient(135deg, #c62828, #1b5e20);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+        }
+        .modal-title {
+            color: #1b5e20;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .modal-details {
+            text-align: left;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #444;
+            margin-top: 15px;
+            background: #f8fff8;
+            padding: 20px;
+            border-radius: 25px;
+        }
+        .modal-details ul {
+            margin-left: 20px;
+        }
+        .modal-details li {
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .subjects-grid {
+                gap: 20px;
+            }
+            .subject-title {
+                font-size: 1.2rem;
+            }
+            .subject-icon {
+                font-size: 45px;
+            }
+            .tab-btn {
+                padding: 8px 20px;
+                font-size: 0.85rem;
+            }
+            .modal-title {
+                font-size: 1.4rem;
+            }
+            .modal-details {
+                font-size: 0.9rem;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body class="lang-bn">
+
+<div class="top-header" id="topHeader"></div>
+
+<div class="logo-social-bar">
+    <div class="container logo-social-flex">
+        <div class="logo-area">
+            <img src="../images/logo.png" alt="KYBDF Logo" onerror="this.src='https://via.placeholder.com/70?text=KYBDF'">
+            <div class="logo-text">
+                <h1 class="bn-name">কলমাকান্দা যুব রক্তদান ফাউন্ডেশন</h1>
+                <p class="en-name">Kalmakanda Youth Blood Donate Foundation (KYBDF)</p>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="social-icons">
+                <a href="https://www.facebook.com/blood.kybdf" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/groups/kbdf.bd" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/8801736567620" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://youtube.com/@kybdf23" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/kybdfbd" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:kalmakandaybdf@gmail.com" target="_blank"><i class="far fa-envelope"></i></a>
+            </div>
+            <div class="language-switch">
+                <button class="lang-option active" data-lang="bn">বাংলা</button>
+                <button class="lang-option" data-lang="en">English</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar">
+    <div class="container nav-flex">
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+        <ul class="nav-menu">
+            <li><a href="../index.html">হোম</a></li>
+            <li><a href="about.html">আমাদের সম্পর্কে</a></li>
+            <li><a href="activities.html" class="active">আমাদের কার্যক্রম</a></li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">পরিষদ <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="advisors.html">উপদেষ্টা পরিষদ</a></li><li><a href="governing-body.html">পরিচালনা পরিষদ</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">কমিটি <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="central-committee.html">কেন্দ্রীয় কমিটি</a></li>
+                    <li class="dropdown-submenu"><a href="#">ইউনিয়ন কমিটি <i class="fas fa-chevron-right"></i></a>
+                        <ul class="submenu"><li><a href="union-kalmakanda.html">কলমাকান্দা সদর ইউনিয়ন</a></li><li><a href="union-nazirpur.html">নাজিরপুর ইউনিয়ন</a></li><li><a href="union-pogla.html">পোগলা ইউনিয়ন</a></li><li><a href="union-borkhapn.html">বড়খাপন ইউনিয়ন</a></li><li><a href="union-lengura.html">লেঙ্গুড়া ইউনিয়ন</a></li><li><a href="union-kailati.html">কৈলাটি ইউনিয়ন</a></li><li><a href="union-khornai.html">খারনৈ ইউনিয়ন</a></li><li><a href="union-rangchati.html">রংছাতি ইউনিয়ন</a></li></ul>
+                    </li>
+                    <li class="dropdown-submenu"><a href="#">আঞ্চলিক কমিটি <i class="fas fa-chevron-right"></i></a>
+                        <ul class="submenu"><li><a href="regional-north.html">কলমাকান্দা উত্তর</a></li><li><a href="regional-south.html">কলমাকান্দা দক্ষিণ</a></li><li><a href="regional-west.html">কলমাকান্দা পশ্চিম</a></li></ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">সদস্য ফরম <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="member-permanent.html">স্থায়ী সদস্য ফরম</a></li><li><a href="member-general.html">সাধারণ সদস্য ফরম</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">সদস্য তালিকা <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="permanent-members.html">স্থায়ী সদস্য</a></li><li><a href="general-members.html">সাধারণ সদস্য</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">মিডিয়া <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="gallery.html">গ্যালারি</a></li><li><a href="news.html">নিউজ</a></li><li><a href="videos.html">ভিডিও</a></li></ul>
+            </li>
+            <li><a href="blood-donation.html">রক্তদান</a></li>
+            <li><a href="notice.html">নোটিশ</a></li>
+            <li><a href="donation.html">ডোনেশন</a></li>
+            <li><a href="contact.html">যোগাযোগ</a></li>
+            <li><a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> লগইন</a></li>
+        </ul>
+        <button class="more-btn">আরও <i class="fas fa-chevron-down"></i></button>
+        <ul class="more-dropdown"></ul>
+    </div>
+</nav>
+
+<main>
+    <div class="container">
+        <!-- হিরো সেকশন -->
+        <div class="activities-hero">
+            <h2>আমাদের মূল কার্যক্রম</h2>
+            <p>গঠনতন্ত্রের ধারা ৪ অনুযায়ী — রক্তদান, সমাজসেবা ও মানবিক উন্নয়নে আমাদের অঙ্গীকার</p>
+        </div>
+        
+        <!-- ট্যাব মেনু -->
+        <div class="activities-tabs">
+            <button class="tab-btn active" data-tab="blood">🩸 রক্তদান সেবা</button>
+            <button class="tab-btn" data-tab="social">🤝 সামাজিক ও মানবিক উন্নয়ন</button>
+            <button class="tab-btn" data-tab="organizational">📊 সাংগঠনিক ও সচেতনতা বৃদ্ধি</button>
+        </div>
+        
+        <!-- ট্যাব 1: রক্তদান সংক্রান্ত -->
+        <div id="tab-blood" class="tab-content active-tab">
+            <div class="subjects-grid">
+                <div class="subject-card" onclick="openModal('নিয়মিত রক্তদান কর্মসূচি', 'fa-calendar-alt', '<ul><li>প্রতি মাসে রক্তদান শিবির আয়োজন</li><li>যুব সমাজকে রক্তদানে উদ্বুদ্ধকরণ</li><li>নিয়মিত রক্তদাতা সৃষ্টি ও রক্তের চাহিদা পূরণ</li><li>সচেতনতামূলক প্রচারণা চালানো</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="subject-title">নিয়মিত রক্তদান কর্মসূচি</div>
+                    <div class="subject-short-desc">প্রতি মাসে রক্তদান শিবির ও যুব সমাজকে রক্তদানে উদ্বুদ্ধকরণ</div>
+                </div>
+                <div class="subject-card" onclick="openModal('জরুরি রক্ত সংযোগ', 'fa-ambulance', '<ul><li>জরুরি প্রয়োজনে রোগী ও রক্তদাতার মধ্যে দ্রুত সংযোগ স্থাপন</li><li>ডিজিটাল ডাটাবেজে ২৫০+ সক্রিয় রক্তদাতা</li><li>২৪/৭ জরুরি হটলাইন সেবা</li><li>স্বেচ্ছাসেবীদের মাধ্যমে দ্রুত রক্ত সরবরাহ</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-ambulance"></i></div>
+                    <div class="subject-title">জরুরি রক্ত সংযোগ</div>
+                    <div class="subject-short-desc">রোগী ও রক্তদাতার মধ্যে দ্রুত সংযোগ স্থাপন</div>
+                </div>
+                <div class="subject-card" onclick="openModal('বিনামূল্যে ব্লাড গ্রুপিং', 'fa-flask', '<ul><li>বিভিন্ন শিক্ষাপ্রতিষ্ঠান ও পাড়ায় পাড়ায় ক্যাম্পেইন</li><li>শিশু-কিশোরদের মাঝে সচেতনতা বৃদ্ধি</li><li>বিনামূল্যে রক্তের গ্রুপ নির্ণয়</li><li>রক্তদানে উৎসাহিত করার প্রাথমিক ধাপ</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-flask"></i></div>
+                    <div class="subject-title">বিনামূল্যে ব্লাড গ্রুপিং</div>
+                    <div class="subject-short-desc">বিনামূল্যে রক্তের গ্রুপ নির্ণয় ক্যাম্পেইন</div>
+                </div>
+                <div class="subject-card" onclick="openModal('স্বাস্থ্য সচেতনতা সেমিনার', 'fa-chalkboard-user', '<ul><li>রক্তদানের উপকারিতা ও ভ্রান্ত ধারণা দূরীকরণ</li><li>স্বাস্থ্যবিধি ও সুস্থ জীবনযাপন</li><li>বিশেষজ্ঞ চিকিৎসকদের অংশগ্রহণ</li><li>প্রশ্নোত্তর পর্ব ও সনদ প্রদান</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-chalkboard-user"></i></div>
+                    <div class="subject-title">স্বাস্থ্য সচেতনতা সেমিনার</div>
+                    <div class="subject-short-desc">রক্তদান ও স্বাস্থ্যবিধি নিয়ে সচেতনতামূলক সেমিনার</div>
+                </div>
+                <div class="subject-card" onclick="openModal('বিশেষ রোগীদের জন্য রক্ত', 'fa-heartbeat', '<ul><li>থ্যালাসেমিয়া, ক্যান্সার ও অ্যানিমিয়া রোগীদের জন্য বিশেষ রক্তের ব্যবস্থা</li><li>নিয়মিত রক্তের চাহিদা পূরণে দাতা তালিকা</li><li>রোগী পরিবারের সাথে সমন্বয়</li><li>বিনামূল্যে রক্ত সরবরাহ</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-heartbeat"></i></div>
+                    <div class="subject-title">বিশেষ রোগীদের জন্য রক্ত</div>
+                    <div class="subject-short-desc">থ্যালাসেমিয়া, ক্যান্সার ও অ্যানিমিয়া রোগীদের জন্য রক্ত</div>
+                </div>
+                <div class="subject-card" onclick="openModal('সিজারিয়ানের জন্য প্রস্তুত দাতা', 'fa-baby', '<ul><li>গর্ভবতী মায়েদের সিজারিয়ান অপারেশনের জন্য প্রস্তুত রক্তদাতা</li><li>জরুরি প্রয়োজনে দ্রুত ব্যবস্থা</li><li>মা ও শিশুর নিরাপত্তা নিশ্চিতকরণ</li><li>হাসপাতালের সাথে সমন্বয়</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-baby"></i></div>
+                    <div class="subject-title">সিজারিয়ানের জন্য প্রস্তুত দাতা</div>
+                    <div class="subject-short-desc">গর্ভবতী মায়েদের সিজারিয়ান অপারেশনের জন্য রক্তদাতা</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ট্যাব 2: সামাজিক ও মানবিক উন্নয়ন -->
+        <div id="tab-social" class="tab-content">
+            <div class="subjects-grid">
+                <div class="subject-card" onclick="openModal('মাদকমুক্ত যুব সমাজ গঠন', 'fa-ban', '<ul><li>যুব সমাজকে মাদকের কুফল সম্পর্কে সচেতন করা</li><li>মানবিক স্বেচ্ছাসেবক হিসেবে গড়ে তোলা</li><li>স্কুল-কলেজে মাদকবিরোধী প্রচারণা</li><li>বিকল্প কর্মসূচি ও প্রশিক্ষণ</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-ban"></i></div>
+                    <div class="subject-title">মাদকমুক্ত যুব সমাজ গঠন</div>
+                    <div class="subject-short-desc">যুব সমাজকে মাদকের কুফল সম্পর্কে সচেতন করা</div>
+                </div>
+                <div class="subject-card" onclick="openModal('শীতবস্ত্র বিতরণ', 'fa-vest', '<ul><li>শীতকালে দরিদ্র ও অসহায় মানুষের মাঝে শীতবস্ত্র বিতরণ</li><li>এ পর্যন্ত ৩০০+ পরিবার পেয়েছে</li><li>প্রত্যন্ত অঞ্চলে পৌঁছানোর চেষ্টা</li><li>স্থানীয় প্রশাসনের সাথে সমন্বয়</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-vest"></i></div>
+                    <div class="subject-title">শীতবস্ত্র বিতরণ</div>
+                    <div class="subject-short-desc">দরিদ্র ও অসহায় মানুষের মাঝে শীতবস্ত্র বিতরণ</div>
+                </div>
+                <div class="subject-card" onclick="openModal('দুর্যোগ সহায়তা', 'fa-hand-holding-heart', '<ul><li>বন্যা, ঘূর্ণিঝড় ও দুর্যোগে ক্ষতিগ্রস্তদের সহায়তা</li><li>খাদ্য, পানি ও জরুরি ত্রাণ বিতরণ</li><li>পুনর্বাসনে সহযোগিতা</li><li>মেডিকেল টিম পাঠানো</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <div class="subject-title">দুর্যোগ সহায়তা</div>
+                    <div class="subject-short-desc">বন্যা, ঘূর্ণিঝড় ও দুর্যোগে ক্ষতিগ্রস্তদের সহায়তা</div>
+                </div>
+                <div class="subject-card" onclick="openModal('বৃক্ষরোপণ অভিযান', 'fa-tree', '<ul><li>পরিবেশ রক্ষায় নিয়মিত বৃক্ষরোপণ</li><li>এ পর্যন্ত ৫০০+ গাছ রোপণ</li><li>বিদ্যালয় ও পাড়ায় পাড়ায় উদ্বুদ্ধকরণ</li><li>পরিবেশ সচেতনতা প্রচারণা</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-tree"></i></div>
+                    <div class="subject-title">বৃক্ষরোপণ অভিযান</div>
+                    <div class="subject-short-desc">পরিবেশ রক্ষায় নিয়মিত বৃক্ষরোপণ</div>
+                </div>
+                <div class="subject-card" onclick="openModal('এতিম ও অসহায় শিশুদের শিক্ষা সহায়তা', 'fa-graduation-cap', '<ul><li>আর্থিকভাবে অসহায় এতিম শিশুদের শিক্ষা উপকরণ ও বৃত্তি প্রদান</li><li>পাঠাগার স্থাপন</li><li>শিক্ষক ও স্বেচ্ছাসেবক নিয়োগ</li><li>নিয়মিত শিক্ষার্থীদের খোঁজখবর</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="subject-title">এতিম ও অসহায় শিশুদের শিক্ষা সহায়তা</div>
+                    <div class="subject-short-desc">অসহায় শিশুদের শিক্ষা উপকরণ ও বৃত্তি প্রদান</div>
+                </div>
+                <div class="subject-card" onclick="openModal('বয়স্ক ও প্রবীণদের স্বাস্থ্যসেবা', 'fa-user-graduate', '<ul><li>বয়স্ক ও প্রবীণদের বিনামূল্যে স্বাস্থ্য পরামর্শ ও চিকিৎসা সেবা</li><li>নিয়মিত স্বাস্থ্য ক্যাম্প</li><li>হাসপাতালে ভর্তি সহায়তা</li><li>প্রবীণদের জন্য বিশেষ সেবা</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-user-graduate"></i></div>
+                    <div class="subject-title">বয়স্ক ও প্রবীণদের স্বাস্থ্যসেবা</div>
+                    <div class="subject-short-desc">বয়স্ক ও প্রবীণদের বিনামূল্যে স্বাস্থ্য পরামর্শ</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ট্যাব 3: সাংগঠনিক ও সচেতনতা বৃদ্ধি -->
+        <div id="tab-organizational" class="tab-content">
+            <div class="subjects-grid">
+                <div class="subject-card" onclick="openModal('ডিজিটাল প্ল্যাটফর্মে মানবসেবা', 'fa-laptop-code', '<ul><li>ওয়েবসাইট ও সামাজিক মাধ্যমে রক্তদানের তথ্য ও আবেদন গ্রহণ</li><li>ডিজিটাল ডাটাবেজ তৈরি ও সংরক্ষণ</li><li>অনলাইন রক্ত চাওয়া ও দেওয়ার ব্যবস্থা</li><li>মোবাইল অ্যাপের পরিকল্পনা</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-laptop-code"></i></div>
+                    <div class="subject-title">ডিজিটাল প্ল্যাটফর্মে মানবসেবা</div>
+                    <div class="subject-short-desc">ওয়েবসাইট ও সামাজিক মাধ্যমে রক্তদানের তথ্য ও আবেদন গ্রহণ</div>
+                </div>
+                <div class="subject-card" onclick="openModal('স্কুল-কলেজে সচেতনতামূলক প্রোগ্রাম', 'fa-school', '<ul><li>শিক্ষাপ্রতিষ্ঠানে রক্তদানের গুরুত্ব ও মাদকের কুফল নিয়ে সচেতনতামূলক কর্মসূচি</li><li>বক্তৃতা, কুইজ ও পুরস্কার বিতরণ</li><li>রক্তদানে উৎসাহিত করা</li><li>যুব সমাজকে সম্পৃক্ত করা</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-school"></i></div>
+                    <div class="subject-title">স্কুল-কলেজে সচেতনতামূলক প্রোগ্রাম</div>
+                    <div class="subject-short-desc">শিক্ষাপ্রতিষ্ঠানে রক্তদান ও মাদকবিরোধী সচেতনতা</div>
+                </div>
+                <div class="subject-card" onclick="openModal('মেডিকেল ক্যাম্প ও রক্তদান শিবির', 'fa-hospital-user', '<ul><li>বার্ষিক মেডিকেল ক্যাম্প ও বৃহৎ রক্তদান শিবিরের আয়োজন</li><li>বিশেষজ্ঞ ডাক্তারদের অংশগ্রহণ</li><li>বিনামূল্যে স্বাস্থ্য পরীক্ষা</li><li>রক্তের গ্রুপ নির্ণয় ও রক্ত সংগ্রহ</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-hospital-user"></i></div>
+                    <div class="subject-title">মেডিকেল ক্যাম্প ও রক্তদান শিবির</div>
+                    <div class="subject-short-desc">বার্ষিক মেডিকেল ক্যাম্প ও বৃহৎ রক্তদান শিবির</div>
+                </div>
+                <div class="subject-card" onclick="openModal('স্বেচ্ছাসেবক প্রশিক্ষণ কর্মশালা', 'fa-chalkboard', '<ul><li>নতুন ও পুরোনো স্বেচ্ছাসেবকদের জন্য প্রশিক্ষণ কর্মশালা</li><li>রক্তদানের নীতি-কৌশল শেখানো</li><li>জরুরি ব্যবস্থাপনা ও ফার্স্ট এইড</li><li>সনদ প্রদান ও অনুপ্রেরণা</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-chalkboard"></i></div>
+                    <div class="subject-title">স্বেচ্ছাসেবক প্রশিক্ষণ কর্মশালা</div>
+                    <div class="subject-short-desc">স্বেচ্ছাসেবকদের দক্ষতা বৃদ্ধির জন্য প্রশিক্ষণ</div>
+                </div>
+                <div class="subject-card" onclick="openModal('রক্তদাতা ডাটাবেজ তৈরি', 'fa-database', '<ul><li>সক্রিয় রক্তদাতাদের তথ্য সংরক্ষণ ও নিয়মিত আপডেটের জন্য ডিজিটাল ডাটাবেজ</li><li>এলাকা ও গ্রুপ অনুযায়ী ভাগ করে রাখা</li><li>জরুরি মুহূর্তে দ্রুত যোগাযোগ</li><li>গোপনীয়তা নিশ্চিতকরণ</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-database"></i></div>
+                    <div class="subject-title">রক্তদাতা ডাটাবেজ তৈরি</div>
+                    <div class="subject-short-desc">সক্রিয় রক্তদাতাদের ডিজিটাল ডাটাবেজ</div>
+                </div>
+                <div class="subject-card" onclick="openModal('সামাজিক যোগাযোগ মাধ্যমে প্রচারণা', 'fa-share-alt', '<ul><li>ফেসবুক, ইউটিউব, হোয়াটসঅ্যাপের মাধ্যমে কার্যক্রমের প্রচার ও সচেতনতা বৃদ্ধি</li><li>ভিডিও কন্টেন্ট ও লাইভ সেশন</li><li>নিয়মিত পোস্ট ও আপডেট</li><li>সবার কাছে পৌঁছানো</li></ul>')">
+                    <div class="subject-icon"><i class="fas fa-share-alt"></i></div>
+                    <div class="subject-title">সামাজিক যোগাযোগ মাধ্যমে প্রচারণা</div>
+                    <div class="subject-short-desc">ফেসবুক, ইউটিউব, হোয়াটসঅ্যাপে প্রচারণা</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- মডাল -->
+<div id="activityModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div class="modal-icon"><i id="modalIcon" class="fas fa-tint"></i></div>
+        <h2 class="modal-title" id="modalTitle">কার্যক্রমের নাম</h2>
+        <div class="modal-details" id="modalDetails"></div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div><h4>কলমাকান্দা যুব রক্তদান ফাউন্ডেশন</h4><p>একটি অরাজনৈতিক স্বেচ্ছাসেবী রক্তদান ও সামাজিক সংগঠন</p></div>
+            <div><h4>যোগাযোগ</h4><p><i class="fas fa-phone"></i> ০১৭৩৬-৫৬৭৬২০<br><i class="fab fa-whatsapp"></i> ০১৭৩৬-৫৬৭৬২০<br><i class="far fa-envelope"></i> kalmakandaybdf@gmail.com</p></div>
+            <div><h4>প্রধান কার্যালয়</h4><p>কলমাকান্দা সদর, নেত্রকোণা</p></div>
+        </div>
+        <div class="copyright"><p>&copy; ২০২৩-২০২৬ KYBDF | সর্বস্বত্ব সংরক্ষিত | Developed by: Tanvir Rahman Shipu</p></div>
+    </div>
+</footer>
+
+<script src="../js/script.js"></script>
+<script>
+    // মডাল ফাংশন
+    const modal = document.getElementById('activityModal');
+    const modalIcon = document.getElementById('modalIcon');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDetails = document.getElementById('modalDetails');
+    
+    function openModal(title, iconClass, detailsHtml) {
+        modalTitle.innerText = title;
+        modalIcon.className = `fas ${iconClass}`;
+        modalDetails.innerHTML = detailsHtml;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    // মডালের বাইরে ক্লিক করলে বন্ধ
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    }
+    
+    // ট্যাব পরিবর্তন
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.getAttribute('data-tab');
+            
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            tabContents.forEach(content => content.classList.remove('active-tab'));
+            document.getElementById(`tab-${tabId}`).classList.add('active-tab');
+        });
+    });
+</script>
+</body>
+</html>

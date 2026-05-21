@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সেটিংস | KYBDF এডমিন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body { background: #f4fcf4; }
+        .admin-header { background: linear-gradient(135deg, #0e2a0e, #1a4a1a); padding: 15px 0; position: sticky; top: 0; z-index: 100; }
+        .admin-header-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .admin-logo { display: flex; align-items: center; gap: 12px; }
+        .admin-logo img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid #ffd966; padding: 2px; }
+        .admin-logo span { color: white; font-size: 1.2rem; font-weight: 700; }
+        .admin-user { display: flex; align-items: center; gap: 20px; }
+        .admin-user span { color: #ffd966; }
+        .logout-btn { background: #c62828; color: white; padding: 8px 20px; border-radius: 30px; text-decoration: none; transition: 0.3s; }
+        .logout-btn:hover { background: white; color: #c62828; }
+        .admin-nav { background: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); padding: 12px 0; margin-bottom: 30px; }
+        .admin-nav-menu { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; list-style: none; }
+        .admin-nav-menu li a { display: block; padding: 8px 20px; background: #f0f7f0; border-radius: 30px; text-decoration: none; color: #1b5e20; font-weight: 500; transition: 0.3s; }
+        .admin-nav-menu li a:hover, .admin-nav-menu li a.active { background: linear-gradient(135deg, #c62828, #1b5e20); color: white; }
+        .settings-card { background: white; border-radius: 25px; padding: 25px; margin-bottom: 30px; border: 1px solid rgba(0, 0, 0, 0.05); }
+        .settings-card h2 { color: #1b5e20; margin-bottom: 20px; border-left: 4px solid #c62828; padding-left: 15px; font-size: 1.3rem; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #1b5e20; }
+        .form-group input { width: 100%; padding: 12px 18px; border: 2px solid #e0e8e0; border-radius: 50px; font-family: inherit; }
+        .btn-save { background: linear-gradient(135deg, #c62828, #1b5e20); color: white; padding: 12px 25px; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; }
+        .btn-reset { background: #f0f0f0; color: #c62828; border: 1px solid #c62828; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-weight: 600; margin-left: 10px; }
+        .info-text { margin-top: 15px; font-size: 0.8rem; color: #888; padding: 10px; background: #f8fff8; border-radius: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="admin-header">
+    <div class="container admin-header-flex">
+        <div class="admin-logo"><img src="../images/logo.png" alt="Logo"><span>KYBDF এডমিন প্যানেল</span></div>
+        <div class="admin-user"><span><i class="fas fa-user-shield"></i> <span id="adminName">admin</span></span><a href="login.html" class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> লগআউট</a></div>
+    </div>
+</div>
+
+<div class="admin-nav">
+    <div class="container">
+        <ul class="admin-nav-menu">
+            <li><a href="dashboard.html">ড্যাশবোর্ড</a></li>
+            <li><a href="notice.html">নোটিশ</a></li>
+            <li><a href="news.html">নিউজ</a></li>
+            <li><a href="gallery.html">গ্যালারি</a></li>
+            <li><a href="videos.html">ভিডিও</a></li>
+            <li><a href="members.html">সদস্য</a></li>
+            <li><a href="donors.html">রক্তদাতা</a></li>
+            <li><a href="settings.html" class="active">সেটিংস</a></li>
+        </ul>
+    </div>
+</div>
+
+<main class="container">
+    <div class="settings-card">
+        <h2><i class="fas fa-key"></i> পাসওয়ার্ড পরিবর্তন করুন</h2>
+        <form id="passwordChangeForm">
+            <div class="form-group"><label>বর্তমান পাসওয়ার্ড</label><input type="password" id="currentPassword" required></div>
+            <div class="form-group"><label>নতুন পাসওয়ার্ড</label><input type="password" id="newPassword" required></div>
+            <div class="form-group"><label>নতুন পাসওয়ার্ড নিশ্চিত করুন</label><input type="password" id="confirmPassword" required></div>
+            <button type="submit" class="btn-save"><i class="fas fa-save"></i> পাসওয়ার্ড পরিবর্তন করুন</button>
+        </form>
+        <div id="passwordMsg" class="info-text" style="margin-top:15px;"></div>
+    </div>
+    
+    <div class="settings-card">
+        <h2><i class="fas fa-database"></i> ডাটাবেজ ব্যবস্থাপনা</h2>
+        <p>নিচের বাটনে ক্লিক করে সব ডাটা রিসেট করতে পারেন। সতর্ক থাকুন: এতে সব নোটিশ, নিউজ, গ্যালারি, ভিডিও, সদস্য ও রক্তদাতার তথ্য মুছে যাবে!</p>
+        <button id="resetDataBtn" class="btn-reset"><i class="fas fa-trash-alt"></i> সব ডাটা রিসেট করুন</button>
+        <div id="resetMsg" class="info-text" style="margin-top:15px;"></div>
+    </div>
+</main>
+
+<script>
+    checkAdminAuth();
+    
+    function checkAdminAuth() {
+        if (localStorage.getItem('adminLoggedIn') !== 'true') window.location.href = 'login.html';
+        document.getElementById('adminName').innerText = localStorage.getItem('adminUsername') || 'admin';
+    }
+    
+    document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('adminLoggedIn');
+        localStorage.removeItem('adminUsername');
+        window.location.href = 'login.html';
+    });
+    
+    // পাসওয়ার্ড পরিবর্তন
+    document.getElementById('passwordChangeForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const current = document.getElementById('currentPassword').value;
+        const newPass = document.getElementById('newPassword').value;
+        const confirmPass = document.getElementById('confirmPassword').value;
+        const msgDiv = document.getElementById('passwordMsg');
+        
+        // ডিফল্ট পাসওয়ার্ড চেক
+        const defaultPassword = 'admin123';
+        
+        if (current !== defaultPassword) {
+            msgDiv.innerHTML = '<span style="color:#c62828;">❌ বর্তমান পাসওয়ার্ড ভুল!</span>';
+            return;
+        }
+        if (newPass !== confirmPass) {
+            msgDiv.innerHTML = '<span style="color:#c62828;">❌ নতুন পাসওয়ার্ড এবং নিশ্চিতকরণ মেলেনি!</span>';
+            return;
+        }
+        if (newPass.length < 4) {
+            msgDiv.innerHTML = '<span style="color:#c62828;">❌ পাসওয়ার্ড কমপক্ষে ৪ অক্ষরের হতে হবে!</span>';
+            return;
+        }
+        
+        // পাসওয়ার্ড সেভ (লোকালস্টোরেজে)
+        localStorage.setItem('kybdf_admin_password', newPass);
+        msgDiv.innerHTML = '<span style="color:#1b5e20;">✅ পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে! পরবর্তী লগইনে নতুন পাসওয়ার্ড ব্যবহার করুন।</span>';
+        this.reset();
+    });
+    
+    // ডাটা রিসেট
+    document.getElementById('resetDataBtn').addEventListener('click', function() {
+        if (confirm('সাবধান! সব ডাটা মুছে যাবে। আপনি কি নিশ্চিত?')) {
+            localStorage.removeItem('kybdf_notices');
+            localStorage.removeItem('kybdf_news');
+            localStorage.removeItem('kybdf_gallery');
+            localStorage.removeItem('kybdf_videos');
+            localStorage.removeItem('kybdf_members');
+            localStorage.removeItem('kybdf_donors');
+            document.getElementById('resetMsg').innerHTML = '<span style="color:#1b5e20;">✅ সব ডাটা সফলভাবে রিসেট করা হয়েছে! পেজ রিফ্রেশ করুন।</span>';
+            setTimeout(() => location.reload(), 2000);
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পরিচালনা পরিষদ | KYBDF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .page-hero {
+            background: linear-gradient(135deg, #f8fff8, #eef5ee);
+            border-radius: 50px;
+            padding: 50px 30px;
+            text-align: center;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: "⚖️";
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 120px;
+            opacity: 0.05;
+            transform: rotate(-15deg);
+        }
+        .page-hero h1 {
+            font-size: 2rem;
+            color: #1b5e20;
+            margin-bottom: 15px;
+        }
+        .page-hero p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #c62828;
+            margin: 60px 0 30px;
+            position: relative;
+            font-weight: 700;
+        }
+        .section-title:after {
+            content: '';
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #c62828, #1b5e20);
+            display: block;
+            margin: 12px auto 0;
+            border-radius: 3px;
+        }
+        
+        /* ট্যাব মেনু স্টাইল */
+        .dept-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0 40px;
+        }
+        .tab-btn {
+            background: transparent;
+            border: 2px solid #c62828;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #c62828;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tab-btn i {
+            font-size: 1rem;
+        }
+        .tab-btn:hover {
+            background: #c62828;
+            color: white;
+            transform: translateY(-3px);
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #c62828, #1b5e20);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 5px 15px rgba(198,40,40,0.3);
+        }
+        
+        /* ট্যাব কন্টেন্ট */
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        .tab-content.active-tab {
+            display: block;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 30px 0 40px;
+        }
+        .member-card {
+            background: linear-gradient(145deg, #ffffff, #fafefa);
+            border-radius: 35px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInCard 0.6s ease backwards;
+            cursor: pointer;
+        }
+        .member-card:nth-child(1) { animation-delay: 0.1s; }
+        .member-card:nth-child(2) { animation-delay: 0.2s; }
+        @keyframes fadeInCard {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(198, 40, 40, 0.05), transparent);
+            transition: 0.5s;
+            opacity: 0;
+        }
+        .member-card:hover::before {
+            opacity: 1;
+        }
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+        }
+        .member-card img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 18px;
+            border: 4px solid #c62828;
+            padding: 4px;
+            background: white;
+            transition: transform 0.3s ease;
+        }
+        .member-card:hover img {
+            transform: scale(1.05);
+            border-color: #ffd966;
+        }
+        .member-card h3 {
+            color: #1b5e20;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .designation {
+            color: #c62828;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+        .blood-group {
+            display: inline-block;
+            background: #1e293b;
+            color: white;
+            font-weight: bold;
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+        }
+        
+        /* মডাল স্টাইল */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: linear-gradient(145deg, #ffffff, #fafefa);
+            margin: 20px;
+            padding: 35px;
+            border-radius: 40px;
+            width: 90%;
+            max-width: 550px;
+            position: relative;
+            animation: modalZoom 0.3s ease;
+            text-align: center;
+        }
+        @keyframes modalZoom {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .close-modal {
+            position: absolute;
+            right: 18px;
+            top: 15px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #c62828;
+            cursor: pointer;
+            background: #f0f0f0;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .close-modal:hover {
+            background: #c62828;
+            color: white;
+            transform: rotate(90deg);
+        }
+        
+        @media (max-width: 768px) {
+            .member-card img {
+                width: 100px;
+                height: 100px;
+            }
+            .section-title {
+                font-size: 1.4rem;
+            }
+            .tab-btn {
+                padding: 8px 18px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body class="lang-bn">
+
+<div class="top-header" id="topHeader"></div>
+
+<div class="logo-social-bar">
+    <div class="container logo-social-flex">
+        <div class="logo-area">
+            <img src="../images/logo.png" alt="KYBDF Logo" onerror="this.src='https://via.placeholder.com/70?text=KYBDF'">
+            <div class="logo-text">
+                <h1 class="bn-name">কলমাকান্দা যুব রক্তদান ফাউন্ডেশন</h1>
+                <p class="en-name">Kalmakanda Youth Blood Donate Foundation (KYBDF)</p>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="social-icons">
+                <a href="https://www.facebook.com/blood.kybdf" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/groups/kbdf.bd" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/8801736567620" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://youtube.com/@kybdf23" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/kybdfbd" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:kalmakandaybdf@gmail.com" target="_blank"><i class="far fa-envelope"></i></a>
+            </div>
+            <div class="language-switch">
+                <button class="lang-option active" data-lang="bn">বাংলা</button>
+                <button class="lang-option" data-lang="en">English</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar">
+    <div class="container nav-flex">
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+        <ul class="nav-menu">
+            <li><a href="../index.html">হোম</a></li>
+            <li><a href="about.html">আমাদের সম্পর্কে</a></li>
+            <li><a href="activities.html">কার্যক্রম</a></li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle active">পরিষদ <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="advisors.html">উপদেষ্টা পরিষদ</a></li>
+                    <li><a href="governing-body.html" class="active">পরিচালনা পরিষদ</a></li>
+                </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">কমিটি <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="central-committee.html">কেন্দ্রীয় কমিটি</a></li>
+                    <li class="dropdown-submenu"><a href="#">ইউনিয়ন কমিটি <i class="fas fa-chevron-right"></i></a>
+                        <ul class="submenu"><li><a href="union-kalmakanda.html">কলমাকান্দা সদর ইউনিয়ন</a></li><li><a href="union-nazirpur.html">নাজিরপুর ইউনিয়ন</a></li><li><a href="union-pogla.html">পোগলা ইউনিয়ন</a></li><li><a href="union-borkhapn.html">বড়খাপন ইউনিয়ন</a></li><li><a href="union-lengura.html">লেঙ্গুড়া ইউনিয়ন</a></li><li><a href="union-kailati.html">কৈলাটি ইউনিয়ন</a></li><li><a href="union-khornai.html">খারনৈ ইউনিয়ন</a></li><li><a href="union-rangchati.html">রংছাতি ইউনিয়ন</a></li></ul>
+                    </li>
+                    <li class="dropdown-submenu"><a href="#">আঞ্চলিক কমিটি <i class="fas fa-chevron-right"></i></a>
+                        <ul class="submenu"><li><a href="regional-north.html">কলমাকান্দা উত্তর</a></li><li><a href="regional-south.html">কলমাকান্দা দক্ষিণ</a></li><li><a href="regional-west.html">কলমাকান্দা পশ্চিম</a></li></ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">সদস্য ফরম <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="member-permanent.html">স্থায়ী সদস্য ফরম</a></li><li><a href="member-general.html">সাধারণ সদস্য ফরম</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">সদস্য তালিকা <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="permanent-members.html">স্থায়ী সদস্য</a></li><li><a href="general-members.html">সাধারণ সদস্য</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">মিডিয়া <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="gallery.html">গ্যালারি</a></li><li><a href="news.html">নিউজ</a></li><li><a href="videos.html">ভিডিও</a></li></ul>
+            </li>
+            <li><a href="blood-donation.html">রক্তদান</a></li>
+            <li><a href="notice.html">নোটিশ</a></li>
+            <li><a href="donation.html">ডোনেশন</a></li>
+            <li><a href="contact.html">যোগাযোগ</a></li>
+            <li><a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> লগইন</a></li>
+        </ul>
+        <button class="more-btn">আরও <i class="fas fa-chevron-down"></i></button>
+        <ul class="more-dropdown"></ul>
+    </div>
+</nav>
+
+<main>
+    <div class="container">
+        <div class="page-hero">
+            <h1>পরিচালনা পরিষদ</h1>
+            <p>গঠনতন্ত্রের ধারা ১৬ অনুযায়ী – নির্বাহী ও পাঁচটি কার্যবিভাগ</p>
+        </div>
+
+        <!-- পরিচালনা পরিষদ (নির্বাহী পরিচালক ও উপ-নির্বাহী পরিচালক) -->
+        <h2 class="section-title">পরিচালনা পরিষদ</h2>
+        <div class="member-grid">
+            <div class="member-card" data-full="তানভীর রহমান শিপু সংগঠনের প্রতিষ্ঠাতা ও প্রধান উদ্যোক্তা। গঠনতন্ত্রের ধারা ১৬.৫ অনুযায়ী নির্বাহী পরিচালক (চেয়ারম্যান) হিসেবে সকল বিভাগের কার্যক্রম তদারকি করেন। গুরুত্বপূর্ণ দিকনির্দেশনা প্রদান এবং জবাবদিহিতার আওতায় সকল সদস্যকে আনেন। সংগঠনের সাংগঠনিক প্রধান হিসেবে দায়িত্ব পালন করছেন।">
+                <img src="../images/executive-director.jpg" alt="নির্বাহী পরিচালক" onerror="this.src='https://via.placeholder.com/130?text=Director'">
+                <h3>তানভীর রহমান শিপু</h3>
+                <div class="designation">নির্বাহী পরিচালক (চেয়ারম্যান)</div>
+                <span class="blood-group">রক্তের গ্রুপ: O+</span>
+            </div>
+            <div class="member-card" data-full="মুরসালিন আহমেদ সহ-প্রতিষ্ঠাতা। গঠনতন্ত্রের ধারা ১৬.৫ অনুযায়ী উপ-নির্বাহী পরিচালক (ভাইস চেয়ারম্যান) হিসেবে নির্বাহী পরিচালককে সহযোগিতা করেন এবং তার অনুপস্থিতিতে সংগঠনের প্রধান হিসেবে দায়িত্ব পালন করেন। যুব উন্নয়ন ফোরামের যুগ্ম আহবায়ক হিসেবে গুরুত্বপূর্ণ ভূমিকা রাখছেন।">
+                <img src="../images/deputy-executive.jpg" alt="উপ-নির্বাহী পরিচালক" onerror="this.src='https://via.placeholder.com/130?text=Deputy'">
+                <h3>মুরসালিন আহমেদ</h3>
+                <div class="designation">উপ-নির্বাহী পরিচালক (ভাইস চেয়ারম্যান)</div>
+                <span class="blood-group">রক্তের গ্রুপ: B+</span>
+            </div>
+        </div>
+
+        <!-- পাঁচটি বিভাগের ট্যাব মেনু -->
+        <div class="dept-tabs">
+            <button class="tab-btn active" data-tab="executive"><i class="fas fa-clipboard-list"></i> নির্বাহী বিভাগ</button>
+            <button class="tab-btn" data-tab="admin"><i class="fas fa-building"></i> প্রশাসনিক বিভাগ</button>
+            <button class="tab-btn" data-tab="ict"><i class="fas fa-laptop-code"></i> আইসিটি বিভাগ</button>
+            <button class="tab-btn" data-tab="blood"><i class="fas fa-droplet"></i> রক্ত ব্যবস্থাপনা বিভাগ</button>
+            <button class="tab-btn" data-tab="accounts"><i class="fas fa-chart-line"></i> হিসাব বিভাগ</button>
+        </div>
+
+        <!-- ট্যাব কন্টেন্ট : নির্বাহী বিভাগ -->
+        <div id="tab-executive" class="tab-content active-tab">
+            <div class="member-grid">
+                <div class="member-card" data-full="হায়দার আলী সোহেল নির্বাহী বিভাগের পরিচালক। গঠনতন্ত্রের ধারা ১৭.১ অনুযায়ী সদস্য সনাক্তকরণ, নতুন সদস্য যুক্ত করা, সদস্যপদ বাতিল, সকল প্রকার নির্বাচন ও সিলেকশন প্রক্রিয়া পরিচালনা করেন। নির্বাহী বিভাগের প্রধান সমন্বয়ক হিসেবে দায়িত্ব পালন করছেন।">
+                    <img src="../images/director-executive.jpg" alt="পরিচালক" onerror="this.src='https://via.placeholder.com/130?text=Director'">
+                    <h3>হায়দার আলী সোহেল</h3>
+                    <div class="designation">পরিচালক</div>
+                    <span class="blood-group">রক্তের গ্রুপ: A+</span>
+                </div>
+                <div class="member-card" data-full="রবিউল ইসলাম সহকারী পরিচালক হিসেবে নির্বাহী বিভাগের পরিচালককে সরাসরি সহযোগিতা করেন এবং সকল কার্যক্রমের রিপোর্ট পরিচালকের কাছে পেশ করেন। নির্বাহী বিভাগের সদস্য হিসেবে দায়িত্ব পালন করছেন।">
+                    <img src="../images/asst-executive.jpg" alt="সহকারী পরিচালক" onerror="this.src='https://via.placeholder.com/130?text=Asst'">
+                    <h3>রবিউল ইসলাম</h3>
+                    <div class="designation">সহকারী পরিচালক</div>
+                    <span class="blood-group">রক্তের গ্রুপ: O+</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ট্যাব কন্টেন্ট : প্রশাসনিক বিভাগ -->
+        <div id="tab-admin" class="tab-content">
+            <div class="member-grid">
+                <div class="member-card" data-full="শামীমা আক্তার প্রশাসনিক বিভাগের পরিচালক। গঠনতন্ত্রের ধারা ১৮.১ অনুযায়ী মাঠ পর্যায়ের সকল কার্যক্রম বাস্তবায়ন, পরিচালনা পরিষদের সিদ্ধান্ত কার্যকর করা এবং আওতাধীন কমিটিগুলোকে দিকনির্দেশনা প্রদান করেন। প্রশাসনিক উপদেষ্টা হিসেবে দায়িত্ব পালন করছেন।">
+                    <img src="../images/director-admin.jpg" alt="পরিচালক" onerror="this.src='https://via.placeholder.com/130?text=Director'">
+                    <h3>শামীমা আক্তার</h3>
+                    <div class="designation">পরিচালক</div>
+                    <span class="blood-group">রক্তের গ্রুপ: AB+</span>
+                </div>
+                <div class="member-card" data-full="আব্দুল্লাহ আল মাসুম সহকারী পরিচালক হিসেবে প্রশাসনিক বিভাগের পরিচালককে সহযোগিতা করেন এবং তার অনুপস্থিতিতে দায়িত্ব পালন করেন। সাংগঠনিক সম্পাদক হিসেবে গুরুত্বপূর্ণ ভূমিকা রাখছেন।">
+                    <img src="../images/asst-admin.jpg" alt="সহকারী পরিচালক" onerror="this.src='https://via.placeholder.com/130?text=Asst'">
+                    <h3>আব্দুল্লাহ আল মাসুম</h3>
+                    <div class="designation">সহকারী পরিচালক</div>
+                    <span class="blood-group">রক্তের গ্রুপ: B-</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ট্যাব কন্টেন্ট : আইসিটি বিভাগ -->
+        <div id="tab-ict" class="tab-content">
+            <div class="member-grid">
+                <div class="member-card" data-full="মেহেদী হাসান আইসিটি বিভাগের পরিচালক। গঠনতন্ত্রের ধারা ১৯.১ অনুযায়ী অনলাইন সকল কার্যক্রম পরিচালনা, সামাজিক যোগাযোগ মাধ্যম ও ওয়েবসাইট রক্ষণাবেক্ষণ, ডিজিটাল কন্টেন্ট তৈরী এবং দেশ-বিদেশে সংগঠনের ইমেজ বৃদ্ধির দায়িত্বে আছেন। প্রধান প্রযুক্তি কর্মকর্তা হিসেবে দায়িত্ব পালন করছেন।">
+                    <img src="../images/director-ict.jpg" alt="পরিচালক" onerror="this.src='https://via.placeholder.com/130?text=Director'">
+                    <h3>মেহেদী হাসান</h3>
+                    <div class="designation">পরিচালক</div>
+                    <span class="blood-group">রক্তের গ্রুপ: A-</span>
+                </div>
+                <div class="member-card" data-full="নাজমুল হুদা সহকারী পরিচালক হিসেবে আইসিটি বিভাগের পরিচালককে প্রযুক্তিগত সহায়তা প্রদান করেন এবং অনলাইন প্ল্যাটফর্মগুলোর নিয়মিত আপডেট নিশ্চিত করেন। ওয়েব মাস্টার হিসেবে দায়িত্ব পালন করছেন।">
+                    <img src="../images/asst-ict.jpg" alt="সহকারী পরিচালক" onerror="this.src='https://via.placeholder.com/130?text=Asst'">
+                    <h3>নাজমুল হুদা</h3>
+                    <div class="designation">সহকারী পরিচালক</div>
+                    <span class="blood-group">রক্তের গ্রুপ: O+</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ট্যাব কন্টেন্ট : রক্ত ব্যবস্থাপনা বিভাগ -->
+        <div id="tab-blood" class="tab-content">
+            <div class="member-grid">
+                <div class="member-card" data-full="রাশেদুল ইসলাম রক্ত ব্যবস্থাপনা বিভাগের পরিচালক। গঠনতন্ত্রের ধারা ২০.১ অনুযায়ী রক্তদাতাদের হালনাগাদ ডাটাবেজ তৈরি, রক্তদাতা ও গ্রহীতার মধ্যে কার্যকরী সমন্বয়, নিরাপদ রক্ত সঞ্চালন নিশ্চিতকরণ এবং ষান্মাসিক প্রতিবেদন প্রস্তুত করেন। ব্লাড ব্যাংক সমন্বয়ক হিসেবে দায়িত্ব পালন করছেন।">
+                    <img src="../images/director-blood.jpg" alt="পরিচালক" onerror="this.src='https://via.placeholder.com/130?text=Director'">
+                    <h3>রাশেদুল ইসলাম</h3>
+                    <div class="designation">পরিচালক</div>
+                    <span class="blood-group">রক্তের গ্রুপ: B+</span>
+                </div>
+                <div class="member-card" data-full="ফারজানা ইয়াসমিন সহকারী পরিচালক হিসেবে রক্ত ব্যবস্থাপনা বিভাগের পরিচালককে জরুরি রক্ত সরবরাহ, রিপোর্টার ও এলাকাভিত্তিক রক্ত সমন্বয়কারীদের কাজে সহায়তা করেন। জরুরি রক্তদান টিম লিডার হিসেবে দায়িত্ব পালন করছেন।">
+                    <img src="../images/asst-blood.jpg" alt="সহকারী পরিচালক" onerror="this.src='https://via.placeholder.com/130?text=Asst'">
+                    <h3>ফারজানা ইয়াসমিন</h3>
+                    <div class="designation">সহকারী পরিচালক</div>
+                    <span class="blood-group">রক্তের গ্রুপ: AB-</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ট্যাব কন্টেন্ট : হিসাব বিভাগ -->
+        <div id="tab-accounts" class="tab-content">
+            <div class="member-grid">
+                <div class="member-card" data-full="মো. আলমগীর হোসেন হিসাব বিভাগের পরিচালক। গঠনতন্ত্রের ধারা ২১.১ ও ২১.২ অনুযায়ী সকল আয়-ব্যয়ের সঠিক হিসাব সংরক্ষণ, মাসিক বা বার্ষিক অডিট সম্পন্ন করা, বাজেট প্রণয়ন এবং আর্থিক স্বচ্ছতা নিশ্চিত করেন। প্রধান হিসাবরক্ষক হিসেবে দায়িত্ব পালন করছেন।">
+                    <img src="../images/director-accounts.jpg" alt="পরিচালক" onerror="this.src='https://via.placeholder.com/130?text=Director'">
+                    <h3>মো: আলমগীর হোসেন</h3>
+                    <div class="designation">পরিচালক</div>
+                    <span class="blood-group">রক্তের গ্রুপ: O-</span>
+                </div>
+                <div class="member-card" data-full="সাদিয়া আফরিন সহকারী পরিচালক হিসেবে হিসাব বিভাগের পরিচালককে সকল আর্থিক লেনদেনের রেকর্ড সংরক্ষণ, ক্যাশ বুক ও ভাউচার রক্ষণাবেক্ষণে সহায়তা করেন। অডিট ও ফাইন্যান্স টিমের দায়িত্বে আছেন।">
+                    <img src="../images/asst-accounts.jpg" alt="সহকারী পরিচালক" onerror="this.src='https://via.placeholder.com/130?text=Asst'">
+                    <h3>সাদিয়া আফরিন</h3>
+                    <div class="designation">সহকারী পরিচালক</div>
+                    <span class="blood-group">রক্তের গ্রুপ: A+</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- গঠনতন্ত্রের ধারা উল্লেখ -->
+        <div style="background: #f0f7f0; border-radius: 30px; padding: 20px; margin: 40px 0; text-align: center; border-left: 5px solid #c62828;">
+            <i class="fas fa-gavel" style="color: #c62828; font-size: 1.5rem;"></i>
+            <p style="margin-top: 10px; color: #2d5a2d;"><strong>গঠনতন্ত্রের ধারা ১৬.৪ ও ১৬.৫</strong> অনুযায়ী পরিচালনা পরিষদের সদস্য সংখ্যা ০৬ থেকে ১৩ জন। নির্বাহী পরিচালক (চেয়ারম্যান) ও উপ-নির্বাহী পরিচালক (ভাইস চেয়ারম্যান)-সহ পাঁচটি বিভাগের প্রতিটিতে একজন পরিচালক ও একজন সহকারী পরিচালক দায়িত্ব পালন করছেন। বিস্তারিত জানতে কার্ডে ক্লিক করুন।</p>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div><h4>কলমাকান্দা যুব রক্তদান ফাউন্ডেশন</h4><p>একটি অরাজনৈতিক স্বেচ্ছাসেবী রক্তদান ও সামাজিক সংগঠন</p></div>
+            <div><h4>যোগাযোগ</h4><p><i class="fas fa-phone"></i> ০১৭৩৬-৫৬৭৬২০<br><i class="fab fa-whatsapp"></i> ০১৭৩৬-৫৬৭৬২০<br><i class="far fa-envelope"></i> kalmakandaybdf@gmail.com</p></div>
+            <div><h4>প্রধান কার্যালয়</h4><p>কলমাকান্দা সদর, নেত্রকোণা</p></div>
+        </div>
+        <div class="copyright"><p>&copy; ২০২৩-২০২৬ KYBDF | সর্বস্বত্ব সংরক্ষিত | Developed by: Tanvir Rahman Shipu</p></div>
+    </div>
+</footer>
+
+<!-- মডাল -->
+<div id="contributionModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <i class="fas fa-trophy" style="font-size: 50px; color: #c62828; margin-bottom: 15px;"></i>
+        <h2 id="modalTitle" style="color: #1b5e20; margin-bottom: 15px;">সাংগঠনিক অবদান</h2>
+        <p id="modalText" style="color: #444; line-height: 1.6;"></p>
+    </div>
+</div>
+
+<script src="../js/script.js"></script>
+<script src="../js/translation.js"></script>
+<script>
+    const modal = document.getElementById('contributionModal');
+    const modalText = document.getElementById('modalText');
+    const modalTitle = document.getElementById('modalTitle');
+
+    // কার্ড ক্লিক করলে মডাল খোলা
+    function attachCardClick() {
+        document.querySelectorAll('.member-card').forEach(card => {
+            card.removeEventListener('click', card.clickHandler);
+            card.clickHandler = function(e) {
+                e.stopPropagation();
+                const fullText = this.getAttribute('data-full');
+                const personName = this.querySelector('h3')?.innerText || 'সদস্য';
+                if (fullText) {
+                    modalTitle.innerText = personName + ' - সাংগঠনিক অবদান';
+                    modalText.innerText = fullText;
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            };
+            card.addEventListener('click', card.clickHandler);
+        });
+    }
+
+    // ট্যাব পরিবর্তন ফাংশন
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.getAttribute('data-tab');
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            tabContents.forEach(content => content.classList.remove('active-tab'));
+            document.getElementById(`tab-${tabId}`).classList.add('active-tab');
+            // ট্যাব পরিবর্তনের পর নতুন কার্ডে ক্লিক ইভেন্ট সংযুক্ত করতে হবে
+            attachCardClick();
+        });
+    });
+
+    // পেজ লোড হলে প্রথমবার কার্ড ক্লিক সক্রিয় করা
+    attachCardClick();
+
+    window.closeModal = function() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    };
+
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    };
+</script>
+</body>
+</html>

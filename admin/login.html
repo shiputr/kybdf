@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>এডমিন লগইন | KYBDF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f4fcf4, #e8f5e8);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            background: white;
+            border-radius: 40px;
+            padding: 45px 35px;
+            width: 420px;
+            max-width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .login-container h2 {
+            color: #1b5e20;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+        .login-container h2 i {
+            color: #c62828;
+            margin-right: 10px;
+        }
+        .logo-area {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo-area img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid #c62828;
+            padding: 3px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e0e8e0;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #c62828;
+            box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.1);
+        }
+        .btn-login {
+            width: 100%;
+            background: linear-gradient(135deg, #c62828, #1b5e20);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+        .alert {
+            padding: 10px;
+            border-radius: 50px;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.85rem;
+        }
+        .alert-error {
+            background: #ffebee;
+            color: #c62828;
+            border-left: 3px solid #c62828;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="logo-area">
+        <img src="../images/logo.png" alt="KYBDF Logo" onerror="this.src='https://via.placeholder.com/80?text=KYBDF'">
+    </div>
+    <h2><i class="fas fa-shield-alt"></i> এডমিন লগইন</h2>
+    <form id="adminLoginForm">
+        <div class="form-group">
+            <input type="text" id="username" placeholder="ইউজারনেম" autocomplete="off" required>
+        </div>
+        <div class="form-group">
+            <input type="password" id="password" placeholder="পাসওয়ার্ড" required>
+        </div>
+        <button type="submit" class="btn-login"><i class="fas fa-sign-in-alt"></i> লগইন করুন</button>
+    </form>
+    <div id="loginMsg" class="alert" style="display: none;"></div>
+    <div class="login-footer">
+        <p>KYBDF এডমিন প্যানেল</p>
+        <p>ডিফল্ট ইউজারনেম: <strong>admin</strong> | পাসওয়ার্ড: <strong>admin123</strong></p>
+    </div>
+</div>
+
+<script>
+    const adminLoginForm = document.getElementById('adminLoginForm');
+    const loginMsg = document.getElementById('loginMsg');
+    
+    // ডিফল্ট এডমিন ক্রেডেনশিয়াল
+    const ADMIN_CREDENTIALS = {
+        username: 'admin',
+        password: 'admin123'
+    };
+    
+    adminLoginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        
+        if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+            // লগইন সফল
+            localStorage.setItem('adminLoggedIn', 'true');
+            localStorage.setItem('adminUsername', username);
+            localStorage.setItem('adminLoginTime', new Date().toISOString());
+            window.location.href = 'dashboard.html';
+        } else {
+            // লগইন ব্যর্থ
+            loginMsg.style.display = 'block';
+            loginMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ভুল ইউজারনেম বা পাসওয়ার্ড!';
+            loginMsg.className = 'alert alert-error';
+            
+            setTimeout(() => {
+                loginMsg.style.display = 'none';
+            }, 3000);
+        }
+    });
+</script>
+</body>
+</html>

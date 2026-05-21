@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সদস্য ম্যানেজমেন্ট | KYBDF এডমিন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body { background: #f4fcf4; }
+        .admin-header { background: linear-gradient(135deg, #0e2a0e, #1a4a1a); padding: 15px 0; position: sticky; top: 0; z-index: 100; }
+        .admin-header-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .admin-logo { display: flex; align-items: center; gap: 12px; }
+        .admin-logo img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid #ffd966; padding: 2px; }
+        .admin-logo span { color: white; font-size: 1.2rem; font-weight: 700; }
+        .admin-user { display: flex; align-items: center; gap: 20px; }
+        .admin-user span { color: #ffd966; }
+        .logout-btn { background: #c62828; color: white; padding: 8px 20px; border-radius: 30px; text-decoration: none; transition: 0.3s; }
+        .logout-btn:hover { background: white; color: #c62828; }
+        .admin-nav { background: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); padding: 12px 0; margin-bottom: 30px; }
+        .admin-nav-menu { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; list-style: none; }
+        .admin-nav-menu li a { display: block; padding: 8px 20px; background: #f0f7f0; border-radius: 30px; text-decoration: none; color: #1b5e20; font-weight: 500; transition: 0.3s; }
+        .admin-nav-menu li a:hover, .admin-nav-menu li a.active { background: linear-gradient(135deg, #c62828, #1b5e20); color: white; }
+        .members-table { background: white; border-radius: 25px; padding: 25px; border: 1px solid rgba(0, 0, 0, 0.05); overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e0e8e0; }
+        th { background: #f8fff8; color: #1b5e20; }
+        .delete-member-btn { background: #c62828; color: white; border: none; padding: 5px 12px; border-radius: 20px; cursor: pointer; }
+        .member-type { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.7rem; }
+        .type-permanent { background: #1b5e20; color: white; }
+        .type-general { background: #ffd966; color: #1b5e20; }
+        @media (max-width: 768px) {
+            th, td { font-size: 0.75rem; padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="admin-header">
+    <div class="container admin-header-flex">
+        <div class="admin-logo"><img src="../images/logo.png" alt="Logo"><span>KYBDF এডমিন প্যানেল</span></div>
+        <div class="admin-user"><span><i class="fas fa-user-shield"></i> <span id="adminName">admin</span></span><a href="login.html" class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> লগআউট</a></div>
+    </div>
+</div>
+
+<div class="admin-nav">
+    <div class="container">
+        <ul class="admin-nav-menu">
+            <li><a href="dashboard.html">ড্যাশবোর্ড</a></li>
+            <li><a href="notice.html">নোটিশ</a></li>
+            <li><a href="news.html">নিউজ</a></li>
+            <li><a href="gallery.html">গ্যালারি</a></li>
+            <li><a href="videos.html">ভিডিও</a></li>
+            <li><a href="members.html" class="active">সদস্য</a></li>
+            <li><a href="donors.html">রক্তদাতা</a></li>
+            <li><a href="settings.html">সেটিংস</a></li>
+        </ul>
+    </div>
+</div>
+
+<main class="container">
+    <div class="members-table">
+        <h2><i class="fas fa-users"></i> সকল সদস্য</h2>
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr><th>ক্রম</th><th>নাম</th><th>মোবাইল</th><th>রক্তের গ্রুপ</th><th>ধরন</th><th>নিবন্ধন তারিখ</th><th>অ্যাকশন</th></tr>
+                </thead>
+                <tbody id="membersTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<script>
+    checkAdminAuth();
+    loadMembers();
+    
+    function checkAdminAuth() {
+        if (localStorage.getItem('adminLoggedIn') !== 'true') window.location.href = 'login.html';
+        document.getElementById('adminName').innerText = localStorage.getItem('adminUsername') || 'admin';
+    }
+    
+    document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('adminLoggedIn');
+        localStorage.removeItem('adminUsername');
+        window.location.href = 'login.html';
+    });
+    
+    function loadMembers() {
+        const members = JSON.parse(localStorage.getItem('kybdf_members') || '[]');
+        const tbody = document.getElementById('membersTableBody');
+        if (members.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">কোনো সদস্য নেই</td></tr>';
+            return;
+        }
+        tbody.innerHTML = members.map((member, index) => `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${escapeHtml(member.nameBn || member.name)}</td>
+                <td>${escapeHtml(member.mobile || 'N/A')}</td>
+                <td>${escapeHtml(member.bloodGroup || 'N/A')}</td>
+                <td><span class="member-type ${member.type === 'permanent' ? 'type-permanent' : 'type-general'}">${member.type === 'permanent' ? 'স্থায়ী' : 'সাধারণ'}</span></td>
+                <td>${member.date || 'N/A'}</td>
+                <td><button class="delete-member-btn" onclick="deleteMember(${index})"><i class="fas fa-trash"></i> ডিলিট</button></td>
+            </tr>
+        `).join('');
+    }
+    
+    function deleteMember(index) {
+        if (confirm('সদস্যটি ডিলিট করতে চান?')) {
+            const members = JSON.parse(localStorage.getItem('kybdf_members') || '[]');
+            members.splice(index, 1);
+            localStorage.setItem('kybdf_members', JSON.stringify(members));
+            loadMembers();
+        }
+    }
+    
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+</script>
+</body>
+</html>

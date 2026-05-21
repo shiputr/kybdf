@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আমাদের সম্পর্কে | KYBDF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* ইউনিক ডিজাইন - আগের মতোই */
+        .about-hero {
+            background: linear-gradient(135deg, #f8fff8, #eef5ee);
+            border-radius: 50px;
+            padding: 50px 30px;
+            text-align: center;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .about-hero::before {
+            content: "🩸";
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 120px;
+            opacity: 0.05;
+            transform: rotate(-15deg);
+        }
+        .about-hero h2 {
+            font-size: 2rem;
+            color: #1b5e20;
+            margin-bottom: 15px;
+        }
+        .about-hero p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* প্রতিষ্ঠাতা সেকশন */
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #1b5e20;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .section-title:after {
+            content: '';
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(90deg, #c62828, #1b5e20);
+            display: block;
+            margin: 12px auto 0;
+            border-radius: 3px;
+        }
+        .founder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            margin: 40px 0;
+        }
+        .founder-card {
+            background: linear-gradient(145deg, #ffffff, #fafefa);
+            border-radius: 40px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .founder-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(198, 40, 40, 0.05), transparent);
+            transition: 0.5s;
+            opacity: 0;
+        }
+        .founder-card:hover::before {
+            opacity: 1;
+        }
+        .founder-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.12);
+        }
+        .founder-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid #c62828;
+            padding: 5px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .founder-card:hover img {
+            transform: scale(1.05);
+            border-color: #ffd966;
+        }
+        .founder-card h3 {
+            color: #1b5e20;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .founder-card .position {
+            color: #c62828;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        /* ট্যাব মেনু */
+        .structure-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0 30px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: transparent;
+            border: 2px solid #c62828;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #c62828;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .tab-btn:hover {
+            background: #c62828;
+            color: white;
+            transform: translateY(-3px);
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #c62828, #1b5e20);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 5px 15px rgba(198,40,40,0.3);
+        }
+        
+        /* ট্যাব কন্টেন্ট */
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        .tab-content.active-tab {
+            display: block;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* সাংগঠনিক কাঠামো (ট্রি ডিজাইন) */
+        .org-tree-container {
+            background: linear-gradient(145deg, #f8fff8, #f0f7f0);
+            border-radius: 40px;
+            padding: 40px 20px;
+            overflow-x: auto;
+        }
+        .org-tree {
+            min-width: 900px;
+            text-align: center;
+        }
+        .tree-node {
+            display: inline-block;
+            background: white;
+            border-radius: 30px;
+            padding: 12px 20px;
+            margin: 8px 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: 0.3s;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .tree-node:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(198,40,40,0.15);
+            border-color: #c62828;
+        }
+        .tree-node strong {
+            color: #1b5e20;
+            font-size: 0.9rem;
+        }
+        .tree-node small {
+            color: #888;
+            font-size: 0.7rem;
+            display: block;
+        }
+        .tree-level {
+            margin: 20px 0;
+            position: relative;
+        }
+        .tree-level-title {
+            color: #c62828;
+            font-size: 0.75rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .tree-connector {
+            margin: 10px 0;
+            color: #c62828;
+            opacity: 0.5;
+        }
+        .branch-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        /* প্রস্তাবনা সেকশন */
+        .preamble-section {
+            background: linear-gradient(145deg, #f8fff8, #f0f7f0);
+            border-radius: 35px;
+            padding: 35px;
+            margin: 40px 0;
+            border-left: 5px solid #c62828;
+            position: relative;
+        }
+        .preamble-section h3 {
+            color: #1b5e20;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        .preamble-section p {
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        .preamble-section .read-more-btn {
+            background: transparent;
+            border: none;
+            color: #c62828;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        .full-preamble {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e8e0;
+        }
+        .full-preamble.show {
+            display: block;
+        }
+        
+        /* যোগাযোগ সেকশন */
+        .contact-section {
+            background: linear-gradient(145deg, #f8fff8, #f0f7f0);
+            border-radius: 35px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        .contact-section h3 {
+            color: #1b5e20;
+            margin-bottom: 15px;
+        }
+        .contact-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .contact-item i {
+            color: #c62828;
+            font-size: 1.1rem;
+        }
+        .contact-item span {
+            color: #555;
+            font-size: 0.85rem;
+        }
+        
+        .btn-read {
+            display: inline-block;
+            background: linear-gradient(135deg, #c62828, #1b5e20);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .btn-read:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .founder-card img {
+                width: 120px;
+                height: 120px;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .tab-btn {
+                padding: 8px 20px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body class="lang-bn">
+
+<div class="top-header" id="topHeader"></div>
+
+<div class="logo-social-bar">
+    <div class="container logo-social-flex">
+        <div class="logo-area">
+            <img src="../images/logo.png" alt="KYBDF Logo" onerror="this.src='https://via.placeholder.com/70?text=KYBDF'">
+            <div class="logo-text">
+                <h1 class="bn-name">কলমাকান্দা যুব রক্তদান ফাউন্ডেশন</h1>
+                <p class="en-name">Kalmakanda Youth Blood Donate Foundation (KYBDF)</p>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="social-icons">
+                <a href="https://www.facebook.com/blood.kybdf" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/groups/kbdf.bd" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/8801736567620" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://youtube.com/@kybdf23" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/kybdfbd" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:kalmakandaybdf@gmail.com" target="_blank"><i class="far fa-envelope"></i></a>
+            </div>
+            <div class="language-switch">
+                <button class="lang-option active" data-lang="bn">বাংলা</button>
+                <button class="lang-option" data-lang="en">English</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar">
+    <div class="container nav-flex">
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+        <ul class="nav-menu">
+            <li><a href="../index.html">হোম</a></li>
+            <li><a href="about.html" class="active">আমাদের সম্পর্কে</a></li>
+            <li><a href="activities.html">কার্যক্রম</a></li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">পরিষদ <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="advisors.html">উপদেষ্টা পরিষদ</a></li><li><a href="governing-body.html">পরিচালনা পরিষদ</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">কমিটি <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="central-committee.html">কেন্দ্রীয় কমিটি</a></li>
+                    <li class="dropdown-submenu"><a href="#">ইউনিয়ন কমিটি <i class="fas fa-chevron-right"></i></a>
+                        <ul class="submenu"><li><a href="union-kalmakanda.html">কলমাকান্দা সদর ইউনিয়ন</a></li><li><a href="union-nazirpur.html">নাজিরপুর ইউনিয়ন</a></li><li><a href="union-pogla.html">পোগলা ইউনিয়ন</a></li><li><a href="union-borkhapn.html">বড়খাপন ইউনিয়ন</a></li><li><a href="union-lengura.html">লেঙ্গুড়া ইউনিয়ন</a></li><li><a href="union-kailati.html">কৈলাটি ইউনিয়ন</a></li><li><a href="union-khornai.html">খারনৈ ইউনিয়ন</a></li><li><a href="union-rangchati.html">রংছাতি ইউনিয়ন</a></li></ul>
+                    </li>
+                    <li class="dropdown-submenu"><a href="#">আঞ্চলিক কমিটি <i class="fas fa-chevron-right"></i></a>
+                        <ul class="submenu"><li><a href="regional-north.html">কলমাকান্দা উত্তর</a></li><li><a href="regional-south.html">কলমাকান্দা দক্ষিণ</a></li><li><a href="regional-west.html">কলমাকান্দা পশ্চিম</a></li></ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">সদস্য ফরম <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="member-permanent.html">স্থায়ী সদস্য ফরম</a></li><li><a href="member-general.html">সাধারণ সদস্য ফরম</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">সদস্য তালিকা <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="permanent-members.html">স্থায়ী সদস্য</a></li><li><a href="general-members.html">সাধারণ সদস্য</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">মিডিয়া <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="gallery.html">গ্যালারি</a></li><li><a href="news.html">নিউজ</a></li><li><a href="videos.html">ভিডিও</a></li></ul>
+            </li>
+            <li><a href="blood-donation.html">রক্তদান</a></li>
+            <li><a href="notice.html">নোটিশ</a></li>
+            <li><a href="donation.html">ডোনেশন</a></li>
+            <li><a href="contact.html">যোগাযোগ</a></li>
+            <li><a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> লগইন</a></li>
+        </ul>
+        <button class="more-btn">আরও <i class="fas fa-chevron-down"></i></button>
+        <ul class="more-dropdown"></ul>
+    </div>
+</nav>
+
+<main>
+    <div class="container">
+        <!-- হিরো সেকশন -->
+        <div class="about-hero">
+            <h2>রক্তের বন্ধনে বন্ধুত্ব</h2>
+            <p>কলমাকান্দা যুব রক্তদান ফাউন্ডেশন (KYBDF) একটি অরাজনৈতিক, অলাভজনক ও মানবিক স্বেচ্ছাসেবী সংগঠন। ২০২৩ সালের ২৭ আগস্ট তারিখে আনুষ্ঠানিকভাবে যাত্রা শুরু করে এই সংগঠনটি। নেত্রকোণা জেলার কলমাকান্দা উপজেলায় জরুরি রক্তের অভাব দূর করতে এবং রক্তদানে সচেতনতা বাড়াতে এর প্রতিষ্ঠাতাগণ এগিয়ে আসেন।</p>
+        </div>
+        
+        <!-- প্রতিষ্ঠাতা সেকশন -->
+        <h2 class="section-title"><i class="fas fa-users"></i> আমাদের প্রতিষ্ঠাতা</h2>
+        <div class="founder-grid">
+            <div class="founder-card">
+                <img src="../images/founder.1.png" alt="তানভীর রহমান শিপু" onerror="this.src='https://via.placeholder.com/150?text=T+Shipu'">
+                <h3>তানভীর রহমান শিপু</h3>
+                <p class="position">প্রতিষ্ঠাতা ও প্রধান উদ্যোক্তা</p>
+            </div>
+            <div class="founder-card">
+                <img src="../images/founder.2.png" alt="মুরসালিন আহমেদ" onerror="this.src='https://via.placeholder.com/150?text=M+Ahmed'">
+                <h3>মুরসালিন আহমেদ</h3>
+                <p class="position">সহ-প্রতিষ্ঠাতা ও নির্বাহী পরিচালক</p>
+            </div>
+            <div class="founder-card">
+                <img src="../images/founder.3.png" alt="হায়দার আলী সোহেল" onerror="this.src='https://via.placeholder.com/150?text=H+Ali'">
+                <h3>হায়দার আলী সোহেল</h3>
+                <p class="position">সহ-প্রতিষ্ঠাতা ও সভাপতি</p>
+            </div>
+        </div>
+        
+        <!-- গঠনতন্ত্রের প্রস্তাবনা -->
+        <div class="preamble-section">
+            <h3><i class="fas fa-file-alt"></i> গঠনতন্ত্রের প্রস্তাবনা</h3>
+            <div id="preambleShort">
+                <p>সৃষ্টিকর্তা আল্লাহ তাআলার নামে এই কাঠামোটি রচনা করছি ও গ্রহণ করছি যে, মানবতার কল্যাণ, দুরারোগ্য রোগীর জীবন রক্ষা ও একটি সুস্থ, সচেতন ও মাদকমুক্ত সমাজ বিনির্মাণই আমাদের একমাত্র লক্ষ্য...</p>
+            </div>
+            <div id="preambleFull" class="full-preamble">
+                <p>সৃষ্টিকর্তা আল্লাহ তাআলার নামে এই কাঠামোটি রচনা করছি ও গ্রহণ করছি যে, মানবতার কল্যাণ, দুরারোগ্য রোগীর জীবন রক্ষা ও একটি সুস্থ, সচেতন ও মাদকমুক্ত সমাজ বিনির্মাণই আমাদের একমাত্র লক্ষ্য। আমাদের এই সংগঠনটি সম্পূর্ণ অরাজনৈতিক, অলাভজনক ও স্বেচ্ছাসেবী রক্তদান সংগঠন হিসেবে চিরকাল দায়িত্ব পালন করে যাবে।</p>
+                <p>আমরা বিশ্বাস করি, মানুষের সেবা একটি মহান ইবাদত ও প্রকৃত ধর্মীয় অনুশীলন। এই সেবার মাধ্যমেই সমাজের প্রকৃত কল্যাণ সম্ভব। রক্তদানকে কেন্দ্র করে গড়ে ওঠা এই বন্ধন শুধু জীবন বাঁচায় না, বরং সমাজে ভ্রাতৃত্ব ও ঐক্যের বন্ধনও সুদৃঢ় করে।</p>
+                <p>সংগঠনের প্রতিটি কাজের কেন্দ্রবিন্দু হবে "রক্তদানে এগিয়ে আসুন, মাদককে না বলুন" – এই মূলমন্ত্রটি সামনে রেখে আমরা কাজ করব।</p>
+                <p>আল্লাহ তা'য়ালা "কলমাকান্দা যুব রক্তদান ফাউন্ডেশন"-কে মানুষের সেবার কাজে কবুল করুন। আমিন।</p>
+            </div>
+            <button class="read-more-btn" id="preambleToggleBtn" onclick="togglePreamble()">
+                আরও পড়ুন <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+        
+        <!-- ট্যাব মেনু -->
+        <div class="structure-tabs">
+            <button class="tab-btn active" data-tab="org">🏛️ সাংগঠনিক কাঠামো</button>
+            <button class="tab-btn" data-tab="rank">📊 পদমর্যাদাগত কাঠামো</button>
+        </div>
+        
+        <!-- ট্যাব 1: সাংগঠনিক কাঠামো (আগের মতো) -->
+        <div id="tab-org" class="tab-content active-tab">
+            <div class="org-tree-container">
+                <div class="org-tree">
+                    <div class="tree-level">
+                        <div class="tree-level-title">◈ শীর্ষ পর্যায় ◈</div>
+                        <div class="tree-node"><strong>উপদেষ্টা পরিষদ</strong><small>সর্বনিম্ন ০৫ জন, আজীবন পদমর্যাদা</small></div>
+                    </div>
+                    <div class="tree-connector"><i class="fas fa-arrow-down"></i></div>
+                    <div class="tree-level">
+                        <div class="tree-node"><strong>পরিচালনা পরিষদ</strong><small>০৬ থেকে ১৩ জন সদস্য, ৫টি বিভাগ</small></div>
+                    </div>
+                    <div class="tree-connector"><i class="fas fa-arrow-down"></i></div>
+                    <div class="tree-level">
+                        <div class="tree-level-title">▬▬▬ ৫টি বিভাগ ▬▬▬</div>
+                        <div class="branch-group">
+                            <div class="tree-node"><strong>নির্বাহী বিভাগ</strong><small>পরিচালক</small></div>
+                            <div class="tree-node"><strong>প্রশাসনিক বিভাগ</strong><small>পরিচালক</small></div>
+                            <div class="tree-node"><strong>আইসিটি বিভাগ</strong><small>পরিচালক</small></div>
+                            <div class="tree-node"><strong>রক্ত ব্যবস্থাপনা বিভাগ</strong><small>পরিচালক</small></div>
+                            <div class="tree-node"><strong>হিসাব বিভাগ</strong><small>পরিচালক</small></div>
+                        </div>
+                    </div>
+                    <div class="tree-connector"><i class="fas fa-arrow-down"></i></div>
+                    <div class="tree-level">
+                        <div class="branch-group">
+                            <div class="tree-node"><strong>কেন্দ্রীয় কার্যকরী পরিষদ</strong><small>১৩টি স্থায়ী পদ</small></div>
+                            <div class="tree-node"><strong>এডমিন প্যানেল</strong><small>ওয়েবসাইট ব্যবস্থাপনা</small></div>
+                        </div>
+                        <div class="branch-group">
+                            <div class="tree-node"><strong>ইউনিয়ন কার্যকরী পরিষদ</strong><small>৮টি ইউনিয়নে</small></div>
+                            <div class="tree-node"><strong>উপ/সহকারী কমিটি</strong><small>অস্থায়ী প্রকল্প</small></div>
+                            <div class="tree-node"><strong>উপ-কমিটি (অনলাইন)</strong><small>অনলাইন কার্যক্রম</small></div>
+                        </div>
+                        <div class="branch-group">
+                            <div class="tree-node"><strong>অন্যান্য সহকারী টিম</strong><small>বিশেষ প্রকল্প</small></div>
+                            <div class="tree-node"><strong>ইভেন্ট বাস্তবায়ন কমিটি</strong><small>প্রোগ্রাম আয়োজন</small></div>
+                            <div class="tree-node"><strong>ক্যাম্পিং পরিচালনা টিম</strong><small>রক্তদান শিবির</small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ট্যাব 2: পদমর্যাদাগত কাঠামো (একই ডিজাইনে ট্রি + কলাম) -->
+        <div id="tab-rank" class="tab-content">
+            <div class="org-tree-container">
+                <div class="org-tree">
+                    <!-- লেভেল 1: প্রতিষ্ঠাতা -->
+                    <div class="tree-level">
+                        <div class="tree-level-title">◈ সর্বোচ্চ কর্তৃপক্ষ ◈</div>
+                        <div class="tree-node"><strong>প্রতিষ্ঠাতা (Founder)</strong><small>সর্বোচ্চ কর্তৃপক্ষ</small></div>
+                    </div>
+                    <div class="tree-connector"><i class="fas fa-arrow-down"></i></div>
+                    
+                    <!-- লেভেল 2: দুই শাখা -->
+                    <div class="tree-level">
+                        <div class="branch-group">
+                            <div class="tree-node"><strong>সহকারী প্রতিষ্ঠাতা (Co-Founder)</strong><small>সহ-প্রতিষ্ঠাতা</small></div>
+                            <div class="tree-node"><strong>প্রতিষ্ঠাকালীণ সদস্য (Founding Member)</strong><small>প্রতিষ্ঠাকালীন সদস্য</small></div>
+                        </div>
+                    </div>
+                    <div class="tree-connector"><i class="fas fa-arrow-down"></i></div>
+                    
+                    <!-- লেভেল 3: উপদেষ্টা পর্যায় -->
+                    <div class="tree-level">
+                        <div class="branch-group">
+                            <div class="tree-node"><strong>প্রধান উপদেষ্টা (Chief Advisor)</strong><small>উপদেষ্টা পরিষদ প্রধান</small></div>
+                            <div class="tree-node"><strong>উপদেষ্টা (Advisor)</strong><small>উপদেষ্টা পরিষদ সদস্য</small></div>
+                        </div>
+                    </div>
+                    <div class="tree-connector"><i class="fas fa-arrow-down"></i></div>
+                    
+                    <!-- লেভেল 4: নির্বাহী পর্যায় -->
+                    <div class="tree-level">
+                        <div class="tree-node"><strong>নির্বাহী পরিচালক/চেয়ারম্যান</strong><small>Executive Director/Chairman</small></div>
+                    </div>
+                    <div class="tree-connector"><i class="fas fa-arrow-down"></i></div>
+                    <div class="tree-level">
+                        <div class="tree-node"><strong>উপ-নির্বাহী পরিচালক/ভাইস চেয়ারম্যান</strong><small>Deputy Executive Director/Vice Chairman</small></div>
+                    </div>
+                    
+                    <!-- লেভেল 5: ৫টি বিভাগের কলাম -->
+                    <div class="tree-level">
+                        <div class="tree-level-title">▬▬▬ ৫টি বিভাগের কাঠামো ▬▬▬</div>
+                        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
+                            <!-- কলাম 1: নির্বাহী বিভাগ -->
+                            <div style="flex: 1; min-width: 150px; background: rgba(255,255,255,0.7); border-radius: 25px; padding: 15px;">
+                                <div class="tree-node" style="margin: 0 0 10px 0;"><strong>নির্বাহী বিভাগ</strong></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>পরিচালক, নির্বাহী বিভাগ</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>সহকারী পরিচালক</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>স্থায়ী সদস্য</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>সাধারণ সদস্য</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>কমিটির অন্যান্য সদস্যগণ</small></div>
+                            </div>
+                            <!-- কলাম 2: প্রশাসনিক বিভাগ -->
+                            <div style="flex: 1; min-width: 150px; background: rgba(255,255,255,0.7); border-radius: 25px; padding: 15px;">
+                                <div class="tree-node" style="margin: 0 0 10px 0;"><strong>প্রশাসনিক বিভাগ</strong></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>পরিচালক, প্রশাসনিক বিভাগ</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>সহকারী পরিচালক</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>সভাপতি</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>সাধারণ সম্পাদক</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>সাংগঠনিক সম্পাদক</small></div>
+                            </div>
+                            <!-- কলাম 3: আইসিটি বিভাগ -->
+                            <div style="flex: 1; min-width: 150px; background: rgba(255,255,255,0.7); border-radius: 25px; padding: 15px;">
+                                <div class="tree-node" style="margin: 0 0 10px 0;"><strong>আইসিটি বিভাগ</strong></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>পরিচালক, আইসিটি বিভাগ</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>সহকারী পরিচালক</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>প্রচার সম্পাদক</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>আইটি সম্পাদক</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>যোগাযোগ সম্পাদক</small></div>
+                            </div>
+                            <!-- কলাম 4: রক্ত ব্যবস্থাপনা বিভাগ -->
+                            <div style="flex: 1; min-width: 150px; background: rgba(255,255,255,0.7); border-radius: 25px; padding: 15px;">
+                                <div class="tree-node" style="margin: 0 0 10px 0;"><strong>রক্ত ব্যবস্থাপনা বিভাগ</strong></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>পরিচালক, রক্ত ব্যবস্থাপনা বিভাগ</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>সহকারী পরিচালক</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>স্বেচ্ছাসেবক বিষয়ক সম্পাদক</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>রিপোর্টার</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>রক্ত সমন্বয়কারী</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>রক্তদান বিষয়ক সম্পাদক</small></div>
+                            </div>
+                            <!-- কলাম 5: হিসাব বিভাগ -->
+                            <div style="flex: 1; min-width: 150px; background: rgba(255,255,255,0.7); border-radius: 25px; padding: 15px;">
+                                <div class="tree-node" style="margin: 0 0 10px 0;"><strong>হিসাব বিভাগ</strong></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>পরিচালক, হিসাব বিভাগ</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>সহকারী পরিচালক</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>অর্থ সম্পাদক</small></div>
+                                <div class="tree-node" style="margin: 5px 0;"><small>সহ অর্থ সম্পাদক</small></div>
+                             
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- অনুভূমিক সংযোগের নোট -->
+                    <div style="margin-top: 25px; padding: 12px; background: #fff3cd; border-radius: 20px; display: inline-block; width: auto;">
+                        <i class="fas fa-link" style="color: #c62828;"></i> <strong>সংযোগ:</strong> রক্ত ব্যবস্থাপনা বিভাগের "রক্ত সমন্বয়কারী" ↔ হিসাব বিভাগের "রক্তদান বিষয়ক সম্পাদক" (অনুভূমিক সংযোগ)
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- গঠনতন্ত্র PDF -->
+        <div class="info-card" style="text-align: center; background: linear-gradient(145deg, #ffffff, #fafefa); border-radius: 30px; padding: 30px; margin: 30px 0;">
+            <h3><i class="fas fa-file-pdf"></i> সম্পূর্ণ গঠনতন্ত্র</h3>
+            <p>বিস্তারিত জানতে সম্পূর্ণ গঠনতন্ত্র পিডিএফ আকারে ডাউনলোড করুন।</p>
+            <button class="btn-read" id="openPdfBtn"><i class="fas fa-download"></i> গঠনতন্ত্র ডাউনলোড করুন</button>
+        </div>
+        
+        <!-- যোগাযোগ -->
+        <div class="contact-section">
+            <h3><i class="fas fa-map-marker-alt"></i> আমাদের ঠিকানা</h3>
+            <p>প্রধান কার্যালয়: কলমাকান্দা উপজেলা সদর, নেত্রকোণা জেলা</p>
+            <div class="contact-details">
+                <div class="contact-item"><i class="fas fa-phone-alt"></i><span>০১৭৩৬-৫৬৭৬২০</span></div>
+                <div class="contact-item"><i class="fab fa-whatsapp"></i><span>০১৭৩৬-৫৬৭৬২০</span></div>
+                <div class="contact-item"><i class="far fa-envelope"></i><span>kalmakandaybdf@gmail.com</span></div>
+                <div class="contact-item"><i class="fas fa-globe"></i><span>bondhumohol-bds.org</span></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- PDF মডাল -->
+<div id="pdfModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <iframe id="pdfFrame" style="width:100%; height:80vh; border:none; border-radius:20px;"></iframe>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div><h4>কলমাকান্দা যুব রক্তদান ফাউন্ডেশন</h4><p>একটি অরাজনৈতিক স্বেচ্ছাসেবী রক্তদান ও সামাজিক সংগঠন</p></div>
+            <div><h4>যোগাযোগ</h4><p><i class="fas fa-phone"></i> ০১৭৩৬-৫৬৭৬২০<br><i class="fab fa-whatsapp"></i> ০১৭৩৬-৫৬৭৬২০<br><i class="far fa-envelope"></i> kalmakandaybdf@gmail.com</p></div>
+            <div><h4>প্রধান কার্যালয়</h4><p>কলমাকান্দা সদর, নেত্রকোণা</p></div>
+        </div>
+        <div class="copyright"><p>&copy; ২০২৩-২০২৬ KYBDF | সর্বস্বত্ব সংরক্ষিত | Developed by: Tanvir Rahman Shipu</p></div>
+    </div>
+</footer>
+
+<script src="../js/script.js"></script>
+<script>
+    // PDF মডাল
+    const modal = document.getElementById('pdfModal');
+    const openBtn = document.getElementById('openPdfBtn');
+    const pdfFrame = document.getElementById('pdfFrame');
+    const pdfPath = '../images/constitution.pdf';
+    
+    if (openBtn) {
+        openBtn.addEventListener('click', () => {
+            pdfFrame.src = pdfPath;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+    }
+    
+    window.closeModal = function() {
+        modal.style.display = 'none';
+        if (pdfFrame) pdfFrame.src = '';
+        document.body.style.overflow = 'auto';
+    }
+    
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) window.closeModal();
+    });
+    
+    // প্রস্তাবনা টগল ফাংশন
+    function togglePreamble() {
+        const fullPreamble = document.getElementById('preambleFull');
+        const toggleBtn = document.getElementById('preambleToggleBtn');
+        
+        if (fullPreamble.classList.contains('show')) {
+            fullPreamble.classList.remove('show');
+            toggleBtn.innerHTML = 'আরও পড়ুন <i class="fas fa-chevron-down"></i>';
+        } else {
+            fullPreamble.classList.add('show');
+            toggleBtn.innerHTML = 'কম দেখুন <i class="fas fa-chevron-up"></i>';
+        }
+    }
+    
+    // ট্যাব পরিবর্তন
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.getAttribute('data-tab');
+            
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            tabContents.forEach(content => content.classList.remove('active-tab'));
+            document.getElementById(`tab-${tabId}`).classList.add('active-tab');
+        });
+    });
+</script>
+</body>
+</html>

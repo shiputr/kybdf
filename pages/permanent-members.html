@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>স্থায়ী সদস্য তালিকা | KYBDF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(145deg, #eef5ee 0%, #d9e6d9 100%);
+            font-family: 'Noto Sans Bengali', 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+        
+        /* ===== গ্লাসমরফিজম হেডার ===== */
+        .unique-header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            margin: 20px 0 30px;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(12px);
+            border-radius: 80px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255,255,240,0.6);
+        }
+        .unique-header h1 {
+            font-size: 2.7rem;
+            font-weight: 800;
+            background: linear-gradient(125deg, #c62828, #f39c12, #1b5e20);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));
+            animation: gentlePulse 2.2s infinite alternate;
+        }
+        .unique-header h1 i {
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: #c62828;
+            font-size: 2rem;
+        }
+        @keyframes gentlePulse {
+            0% { text-shadow: 0 0 0px rgba(198,40,40,0); }
+            100% { text-shadow: 0 0 12px rgba(27,94,32,0.2); }
+        }
+        .unique-header p {
+            margin-top: 12px;
+            font-weight: 500;
+            color: #1b5e20;
+            background: rgba(255,255,210,0.7);
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            font-size: 0.9rem;
+        }
+        
+        /* ফিল্টার সেকশন (আধুনিক) */
+        .filter-container {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 50px;
+            padding: 20px 25px;
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-between;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            border: 1px solid rgba(255,255,240,0.8);
+        }
+        .filter-box {
+            flex: 1;
+            min-width: 140px;
+        }
+        .filter-box label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #2c5e2c;
+            display: block;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+        .filter-box label i {
+            margin-right: 5px;
+            font-size: 0.7rem;
+        }
+        .filter-box input {
+            width: 100%;
+            background: #ffffffdd;
+            border: 1px solid #cfe2cf;
+            padding: 8px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .filter-box input:focus {
+            outline: none;
+            border-color: #c62828;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(198,40,40,0.1);
+        }
+        
+        /* টেবিল র‍্যাপার (গ্লাস) */
+        .table-glass {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(5px);
+            border-radius: 38px;
+            padding: 20px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.08);
+            overflow-x: auto;
+            margin: 30px 0;
+            border: 1px solid rgba(255,255,245,0.9);
+        }
+        .member-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+        .member-table th {
+            background: transparent;
+            color: #1b5e20;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 18px 12px;
+            border-bottom: 2px solid #cbcbcb30;
+            text-align: left;
+        }
+        .member-table td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #d0e0d080;
+            color: #2d3748;
+            font-size: 0.9rem;
+            vertical-align: middle;
+            transition: 0.2s;
+        }
+        .member-table tr {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .member-table tr:hover {
+            background: rgba(255, 245, 225, 0.6);
+            transform: scale(1.002);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .member-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffb347;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+        }
+        .blood-badge {
+            background: linear-gradient(135deg, #1e293b, #2a3a4a);
+            color: #fff;
+            padding: 5px 14px;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: inline-block;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        
+        /* পেজিনেশন */
+        .pagination-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            margin: 35px 0 50px;
+        }
+        .pagination-btn {
+            background: linear-gradient(115deg, #c62828, #b01b1b);
+            border: none;
+            color: white;
+            padding: 8px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+        }
+        .pagination-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px rgba(0,0,0,0.15);
+        }
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .page-number {
+            background: #fff8e7;
+            padding: 5px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1b5e20;
+            box-shadow: inset 0 1px 2px #0001, 0 2px 4px #0001;
+        }
+        
+        /* মডাল ইউনিক */
+        .unique-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-card {
+            background: linear-gradient(145deg, #ffffff, #f8fff8);
+            margin: 20px;
+            padding: 30px;
+            border-radius: 55px;
+            width: 90%;
+            max-width: 540px;
+            position: relative;
+            animation: fadeSlideUp 0.35s ease;
+            box-shadow: 0 30px 45px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,215,150,0.6);
+        }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #c62828;
+            cursor: pointer;
+            background: #f1f1f1;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .modal-close:hover {
+            background: #c62828;
+            color: white;
+            transform: rotate(90deg);
+        }
+        .modal-avatar {
+            text-align: center;
+        }
+        .modal-avatar img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 4px solid #c62828;
+            object-fit: cover;
+            margin-bottom: 12px;
+        }
+        .modal-info p {
+            margin: 12px 0;
+            border-bottom: 1px dashed #e2e8e2;
+            padding-bottom: 6px;
+            font-size: 0.9rem;
+        }
+        .modal-info strong {
+            color: #1b5e20;
+            display: inline-block;
+            width: 125px;
+        }
+        
+        @media (max-width: 780px) {
+            .unique-header h1 {
+                font-size: 1.7rem;
+            }
+            .filter-box {
+                min-width: 110px;
+            }
+            .member-table th, .member-table td {
+                padding: 10px 6px;
+                font-size: 0.75rem;
+            }
+            .member-img {
+                width: 36px;
+                height: 36px;
+            }
+        }
+    </style>
+</head>
+<body class="lang-bn">
+
+<div class="top-header" id="topHeader"></div>
+
+<div class="logo-social-bar">
+    <div class="container logo-social-flex">
+        <div class="logo-area">
+            <img src="../images/logo.png" alt="KYBDF Logo" onerror="this.src='https://via.placeholder.com/70?text=KYBDF'">
+            <div class="logo-text">
+                <h1 class="bn-name">কলমাকান্দা যুব রক্তদান ফাউন্ডেশন</h1>
+                <p class="en-name">Kalmakanda Youth Blood Donate Foundation (KYBDF)</p>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="social-icons">
+                <a href="https://www.facebook.com/blood.kybdf" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/groups/kbdf.bd" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/8801736567620" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://youtube.com/@kybdf23" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/kybdfbd" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:kalmakandaybdf@gmail.com" target="_blank"><i class="far fa-envelope"></i></a>
+            </div>
+            <div class="language-switch">
+                <button class="lang-option active" data-lang="bn">বাংলা</button>
+                <button class="lang-option" data-lang="en">English</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar">
+    <div class="container nav-flex">
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+        <ul class="nav-menu">
+            <li><a href="../index.html">হোম</a></li>
+            <li><a href="about.html">আমাদের সম্পর্কে</a></li>
+            <li><a href="activities.html">কার্যক্রম</a></li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">পরিষদ <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="advisors.html">উপদেষ্টা পরিষদ</a></li><li><a href="governing-body.html">পরিচালনা পরিষদ</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">কমিটি <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="central-committee.html">কেন্দ্রীয় কমিটি</a></li>
+                    <li class="dropdown-submenu"><a href="#">ইউনিয়ন কমিটি <i class="fas fa-chevron-right"></i></a>
+                        <ul class="submenu"><li><a href="union-kalmakanda.html">কলমাকান্দা সদর ইউনিয়ন</a></li><li><a href="union-nazirpur.html">নাজিরপুর ইউনিয়ন</a></li><li><a href="union-pogla.html">পোগলা ইউনিয়ন</a></li><li><a href="union-borkhapn.html">বড়খাপন ইউনিয়ন</a></li><li><a href="union-lengura.html">লেঙ্গুড়া ইউনিয়ন</a></li><li><a href="union-kailati.html">কৈলাটি ইউনিয়ন</a></li><li><a href="union-khornai.html">খারনৈ ইউনিয়ন</a></li><li><a href="union-rangchati.html">রংছাতি ইউনিয়ন</a></li></ul>
+                    </li>
+                    <li class="dropdown-submenu"><a href="#">আঞ্চলিক কমিটি <i class="fas fa-chevron-right"></i></a>
+                        <ul class="submenu"><li><a href="regional-north.html">কলমাকান্দা উত্তর</a></li><li><a href="regional-south.html">কলমাকান্দা দক্ষিণ</a></li><li><a href="regional-west.html">কলমাকান্দা পশ্চিম</a></li></ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">সদস্য ফরম <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="member-permanent.html">স্থায়ী সদস্য ফরম</a></li><li><a href="member-general.html">সাধারণ সদস্য ফরম</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle active">সদস্য তালিকা <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="permanent-members.html" class="active">স্থায়ী সদস্য</a></li><li><a href="general-members.html">সাধারণ সদস্য</a></li></ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle">মিডিয়া <i class="fas fa-chevron-down arrow-icon"></i></a>
+                <ul class="dropdown-menu"><li><a href="gallery.html">গ্যালারি</a></li><li><a href="news.html">নিউজ</a></li><li><a href="videos.html">ভিডিও</a></li></ul>
+            </li>
+            <li><a href="blood-donation.html">রক্তদান</a></li>
+            <li><a href="notice.html">নোটিশ</a></li>
+            <li><a href="donation.html">ডোনেশন</a></li>
+            <li><a href="contact.html">যোগাযোগ</a></li>
+            <li><a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> লগইন</a></li>
+        </ul>
+        <button class="more-btn">আরও <i class="fas fa-chevron-down"></i></button>
+        <ul class="more-dropdown"></ul>
+    </div>
+</nav>
+
+<main>
+    <div class="container">
+        <!-- ইউনিক হেডার -->
+        <div class="unique-header">
+            <h1><i class="fas fa-star-of-life"></i> স্থায়ী সদস্য তালিকা <i class="fas fa-hand-holding-heart"></i></h1>
+        
+        </div>
+
+        <!-- ফিল্টার ক্ষেত্র (আইকন সহ) -->
+        <div class="filter-container">
+            <div class="filter-box"><label><i class="fas fa-id-card"></i> আইডি নং</label><input type="text" id="filterId" placeholder="KYBDF-..."></div>
+            <div class="filter-box"><label><i class="fas fa-tint"></i> রক্তের গ্রুপ</label><input type="text" id="filterBlood" placeholder="A+, O-"></div>
+            <div class="filter-box"><label><i class="fas fa-user"></i> নাম</label><input type="text" id="filterName" placeholder="নাম"></div>
+            <div class="filter-box"><label><i class="fas fa-male"></i> পিতার নাম</label><input type="text" id="filterFather" placeholder="পিতার নাম"></div>
+            <div class="filter-box"><label><i class="fas fa-map-marker-alt"></i> ঠিকানা</label><input type="text" id="filterAddress" placeholder="এলাকা"></div>
+            <div class="filter-box"><label><i class="fas fa-phone-alt"></i> মোবাইল</label><input type="text" id="filterMobile" placeholder="০১XXXXXXXXX"></div>
+        </div>
+
+        <!-- গ্লাস টেবিল -->
+        <div class="table-glass">
+            <table class="member-table" id="memberTable">
+                <thead>
+                    <tr>
+                        <th>আইডি নং</th>
+                        <th>ছবি</th>
+                        <th>রক্তের গ্রুপ</th>
+                        <th>নাম</th>
+                        <th>পিতার নাম</th>
+                        <th>ঠিকানা</th>
+                        <th>যোগাযোগ</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr><td colspan="7" style="text-align:center;">লোড হচ্ছে...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- পেজিনেশন -->
+        <div class="pagination-area">
+            <button class="pagination-btn" id="prevBtn" disabled><i class="fas fa-arrow-left"></i> পূর্ববর্তী</button>
+            <span class="page-number" id="pageInfo">পাতা ১ / ১</span>
+            <button class="pagination-btn" id="nextBtn">পরবর্তী <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+</main>
+
+<!-- মডাল (বিস্তারিত) -->
+<div id="memberModal" class="unique-modal">
+    <div class="modal-card">
+        <div class="modal-close" onclick="closeModal()">&times;</div>
+        <div class="modal-avatar">
+            <img id="modalImg" src="" alt="ছবি">
+            <h3 id="modalName" style="color:#1b5e20;">নাম</h3>
+        </div>
+        <div class="modal-info" id="modalDetails"></div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div><h4>কলমাকান্দা যুব রক্তদান ফাউন্ডেশন</h4><p>একটি অরাজনৈতিক স্বেচ্ছাসেবী রক্তদান ও সামাজিক সংগঠন</p></div>
+            <div><h4>যোগাযোগ</h4><p><i class="fas fa-phone"></i> ০১৭৩৬-৫৬৭৬২০<br><i class="fab fa-whatsapp"></i> ০১৭৩৬-৫৬৭৬২০<br><i class="far fa-envelope"></i> kalmakandaybdf@gmail.com</p></div>
+            <div><h4>প্রধান কার্যালয়</h4><p>কলমাকান্দা সদর, নেত্রকোণা</p></div>
+        </div>
+        <div class="copyright"><p>&copy; ২০২৩-২০২৬ KYBDF | সর্বস্বত্ব সংরক্ষিত | Developed by: Tanvir Rahman Shipu</p></div>
+    </div>
+</footer>
+
+<script src="../js/script.js"></script>
+<script src="../js/translation.js"></script>
+<script>
+    // ---------- ডেমো ডাটা (৫২ জন স্থায়ী সদস্য) ----------
+    const generateDemoMembers = () => {
+        const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
+        const firstNames = ['আবুল', 'বাবুল', 'চন্দন', 'দিলীপ', 'এহসান', 'ফরহাদ', 'গোলাম', 'হামিদ', 'ইমন', 'জুবায়ের', 'করিম', 'লিটন', 'মনির', 'নাদিম', 'ওমর', 'পাভেল', 'রবি', 'শফিক', 'তাপস', 'উজ্জ্বল'];
+        const lastNames = ['মিয়া', 'হোসেন', 'ইসলাম', 'আক্তার', 'রহমান', 'বেগম', 'কুমার', 'দাস', 'সরকার', 'মন্ডল'];
+        const fatherNames = ['আবদুল মালেক', 'মজিবর রহমান', 'লাল মিয়া', 'আলমগীর হোসেন', 'রফিকুল ইসলাম', 'ছানাউল্লাহ'];
+        const areas = ['কলমাকান্দা সদর', 'নাজিরপুর', 'পোগলা', 'বড়খাপন', 'লেঙ্গুড়া', 'কৈলাটি', 'খারনৈ', 'রংছাতি', 'ময়মনসিংহ', 'ঢাকা'];
+        const phones = ['01712', '01813', '01914', '01515', '01616', '01317', '01418'];
+        
+        const members = [];
+        for (let i = 1; i <= 52; i++) {
+            const fName = firstNames[i % firstNames.length];
+            const lName = lastNames[i % lastNames.length];
+            const name = `${fName} ${lName}`;
+            const father = fatherNames[i % fatherNames.length];
+            const address = `${areas[i % areas.length]}, নেত্রকোণা`;
+            const blood = bloodGroups[i % bloodGroups.length];
+            const phone = phones[i % phones.length] + Math.floor(10000000 + Math.random() * 90000000);
+            const id = `KYBDF-${String(100 + i).slice(1)}`;
+            
+            members.push({
+                id: id,
+                name: name,
+                father: father,
+                blood: blood,
+                address: address,
+                phone: phone,
+                img: `../images/members/member${(i % 20) + 1}.jpg`,
+                email: `member${i}@kybdf.org`,
+                birthDate: `১৯৮${i % 10} সালের ${(i % 12)+1} জানুয়ারি`,
+                lastDonation: `২০২৩ সালের ${(i % 12)+1} মাস`,
+                totalDonation: (i % 10) + 1,
+                occupation: i % 3 === 0 ? 'চাকরিজীবী' : (i % 2 === 0 ? 'ব্যবসায়ী' : 'ছাত্র'),
+                mother: 'মরিয়ম বেগম'
+            });
+        }
+        return members;
+    };
+    
+    let allMembers = generateDemoMembers();
+    let filteredMembers = [...allMembers];
+    let currentPage = 1;
+    const rowsPerPage = 25;
+    
+    // ফিল্টার এলিমেন্ট
+    const filterId = document.getElementById('filterId');
+    const filterBlood = document.getElementById('filterBlood');
+    const filterName = document.getElementById('filterName');
+    const filterFather = document.getElementById('filterFather');
+    const filterAddress = document.getElementById('filterAddress');
+    const filterMobile = document.getElementById('filterMobile');
+    
+    function applyFilters() {
+        const idVal = filterId.value.trim().toLowerCase();
+        const bloodVal = filterBlood.value.trim().toLowerCase();
+        const nameVal = filterName.value.trim().toLowerCase();
+        const fatherVal = filterFather.value.trim().toLowerCase();
+        const addressVal = filterAddress.value.trim().toLowerCase();
+        const mobileVal = filterMobile.value.trim().toLowerCase();
+        
+        filteredMembers = allMembers.filter(m => {
+            if (idVal && !m.id.toLowerCase().includes(idVal)) return false;
+            if (bloodVal && !m.blood.toLowerCase().includes(bloodVal)) return false;
+            if (nameVal && !m.name.toLowerCase().includes(nameVal)) return false;
+            if (fatherVal && !m.father.toLowerCase().includes(fatherVal)) return false;
+            if (addressVal && !m.address.toLowerCase().includes(addressVal)) return false;
+            if (mobileVal && !m.phone.includes(mobileVal)) return false;
+            return true;
+        });
+        currentPage = 1;
+        renderTable();
+        updatePaginationState();
+    }
+    
+    function renderTable() {
+        const start = (currentPage - 1) * rowsPerPage;
+        const paginated = filteredMembers.slice(start, start + rowsPerPage);
+        const tbody = document.getElementById('tableBody');
+        if (!paginated.length) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">🔍 কোনো সদস্য পাওয়া যায়নি</td></tr>';
+            document.getElementById('pageInfo').innerText = `পাতা ০ / ০`;
+            return;
+        }
+        let html = '';
+        paginated.forEach(member => {
+            html += `
+                <tr onclick="showMemberDetails('${member.id}')">
+                    <td>${member.id}</td>
+                    <td><img class="member-img" src="${member.img}" alt="ছবি" onerror="this.src='https://via.placeholder.com/48?text=No'"></td>
+                    <td><span class="blood-badge">${member.blood}</span></td>
+                    <td>${member.name}</td>
+                    <td>${member.father}</td>
+                    <td>${member.address}</td>
+                    <td>${member.phone}</td>
+                </tr>
+            `;
+        });
+        tbody.innerHTML = html;
+        const totalPages = Math.ceil(filteredMembers.length / rowsPerPage);
+        document.getElementById('pageInfo').innerText = `পাতা ${currentPage} / ${totalPages || 1}`;
+    }
+    
+    function updatePaginationState() {
+        const totalPages = Math.ceil(filteredMembers.length / rowsPerPage);
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        prevBtn.disabled = (currentPage <= 1);
+        nextBtn.disabled = (currentPage >= totalPages || totalPages === 0);
+    }
+    
+    window.showMemberDetails = function(id) {
+        const member = filteredMembers.find(m => m.id === id);
+        if (!member) return;
+        document.getElementById('modalImg').src = member.img;
+        document.getElementById('modalName').innerText = member.name;
+        const detailsHtml = `
+            <p><strong>আইডি নং</strong> : ${member.id}</p>
+            <p><strong>রক্তের গ্রুপ</strong> : ${member.blood}</p>
+            <p><strong>পিতার নাম</strong> : ${member.father}</p>
+            <p><strong>মাতার নাম</strong> : ${member.mother}</p>
+            <p><strong>জন্ম তারিখ</strong> : ${member.birthDate}</p>
+            <p><strong>পেশা</strong> : ${member.occupation}</p>
+            <p><strong>ঠিকানা</strong> : ${member.address}</p>
+            <p><strong>মোবাইল</strong> : ${member.phone}</p>
+            <p><strong>ইমেইল</strong> : ${member.email}</p>
+            <p><strong>মোট রক্তদান</strong> : ${member.totalDonation} বার</p>
+            <p><strong>শেষ রক্তদানের তারিখ</strong> : ${member.lastDonation}</p>
+            <p><strong>সদস্য পদবী</strong> : স্থায়ী সদস্য</p>
+        `;
+        document.getElementById('modalDetails').innerHTML = detailsHtml;
+        document.getElementById('memberModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    };
+    
+    window.closeModal = function() {
+        document.getElementById('memberModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    };
+    
+    document.getElementById('prevBtn').addEventListener('click', () => {
+        if (currentPage > 1) { currentPage--; renderTable(); updatePaginationState(); }
+    });
+    document.getElementById('nextBtn').addEventListener('click', () => {
+        const totalPages = Math.ceil(filteredMembers.length / rowsPerPage);
+        if (currentPage < totalPages) { currentPage++; renderTable(); updatePaginationState(); }
+    });
+    
+    const inputs = [filterId, filterBlood, filterName, filterFather, filterAddress, filterMobile];
+    inputs.forEach(inp => inp.addEventListener('input', applyFilters));
+    
+    window.onclick = function(e) {
+        const modal = document.getElementById('memberModal');
+        if (e.target === modal) closeModal();
+    };
+    
+    renderTable();
+    updatePaginationState();
+</script>
+</body>
+</html>
