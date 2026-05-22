@@ -8,182 +8,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        body {
-            background: #f4fcf4;
-        }
-        .admin-header {
-            background: linear-gradient(135deg, #0e2a0e, #1a4a1a);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .admin-header-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .admin-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .admin-logo img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid #ffd966;
-            padding: 2px;
-        }
-        .admin-logo span {
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-        .admin-user {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .admin-user span {
-            color: #ffd966;
-        }
-        .logout-btn {
-            background: #c62828;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 30px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        .logout-btn:hover {
-            background: white;
-            color: #c62828;
-        }
-        .admin-nav {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 12px 0;
-            margin-bottom: 30px;
-        }
-        .admin-nav-menu {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            list-style: none;
-        }
-        .admin-nav-menu li a {
-            display: block;
-            padding: 8px 20px;
-            background: #f0f7f0;
-            border-radius: 30px;
-            text-decoration: none;
-            color: #1b5e20;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-        .admin-nav-menu li a:hover, .admin-nav-menu li a.active {
-            background: linear-gradient(135deg, #c62828, #1b5e20);
-            color: white;
-        }
-        .form-card {
-            background: white;
-            border-radius: 25px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        .form-card h2 {
-            color: #1b5e20;
-            margin-bottom: 20px;
-            border-left: 4px solid #c62828;
-            padding-left: 15px;
-            font-size: 1.3rem;
-        }
-        .form-group {
-            margin-bottom: 18px;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px 18px;
-            border: 2px solid #e0e8e0;
-            border-radius: 50px;
-            font-family: inherit;
-        }
-        .form-group textarea {
-            border-radius: 20px;
-            resize: vertical;
-        }
-        .btn-submit {
-            background: linear-gradient(135deg, #c62828, #1b5e20);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-        .news-list {
-            background: white;
-            border-radius: 25px;
-            padding: 25px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        .news-item {
-            border-bottom: 1px solid #e0e8e0;
-            padding: 15px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .news-item:last-child {
-            border-bottom: none;
-        }
-        .news-content h4 {
-            color: #1b5e20;
-            margin-bottom: 5px;
-        }
-        .news-content p {
-            color: #666;
-            font-size: 0.85rem;
-        }
-        .news-date {
-            font-size: 0.7rem;
-            color: #999;
-            margin-top: 5px;
-        }
-        .news-actions {
-            display: flex;
-            gap: 10px;
-        }
-        .edit-btn, .delete-btn {
-            padding: 5px 12px;
-            border-radius: 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 0.75rem;
-        }
-        .edit-btn {
-            background: #ffd966;
-            color: #1b5e20;
-        }
-        .delete-btn {
-            background: #c62828;
-            color: white;
-        }
+        body { background: #f4fcf4; }
+        .admin-header { background: linear-gradient(135deg, #0e2a0e, #1a4a1a); padding: 15px 0; position: sticky; top: 0; z-index: 100; }
+        .admin-header-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .admin-logo { display: flex; align-items: center; gap: 12px; }
+        .admin-logo img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid #ffd966; padding: 2px; }
+        .admin-logo span { color: white; font-size: 1.2rem; font-weight: 700; }
+        .admin-user { display: flex; align-items: center; gap: 20px; }
+        .admin-user span { color: #ffd966; }
+        .logout-btn { background: #c62828; color: white; padding: 8px 20px; border-radius: 30px; text-decoration: none; transition: 0.3s; }
+        .logout-btn:hover { background: white; color: #c62828; }
+        .admin-nav { background: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); padding: 12px 0; margin-bottom: 30px; }
+        .admin-nav-menu { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; list-style: none; }
+        .admin-nav-menu li a { display: block; padding: 8px 20px; background: #f0f7f0; border-radius: 30px; text-decoration: none; color: #1b5e20; font-weight: 500; transition: 0.3s; }
+        .admin-nav-menu li a:hover, .admin-nav-menu li a.active { background: linear-gradient(135deg, #c62828, #1b5e20); color: white; }
+        .form-card { background: white; border-radius: 25px; padding: 25px; margin-bottom: 30px; border: 1px solid rgba(0, 0, 0, 0.05); }
+        .form-card h2 { color: #1b5e20; margin-bottom: 20px; border-left: 4px solid #c62828; padding-left: 15px; font-size: 1.3rem; }
+        .form-group { margin-bottom: 18px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px 18px; border: 2px solid #e0e8e0; border-radius: 50px; font-family: inherit; }
+        .form-group textarea { border-radius: 20px; resize: vertical; }
+        .file-input { padding: 8px 12px; background: #f8fff8; border: 1px dashed #c62828; border-radius: 50px; }
+        .preview-img { max-width: 80px; max-height: 80px; margin-top: 10px; border-radius: 12px; border: 1px solid #ddd; }
+        .btn-submit { background: linear-gradient(135deg, #c62828, #1b5e20); color: white; padding: 12px 25px; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; }
+        .news-list { background: white; border-radius: 25px; padding: 25px; border: 1px solid rgba(0, 0, 0, 0.05); }
+        .news-item { border-bottom: 1px solid #e0e8e0; padding: 15px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .news-item:last-child { border-bottom: none; }
+        .news-img { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; background: #f0f0f0; }
+        .news-content { flex: 1; }
+        .news-content h4 { color: #1b5e20; margin-bottom: 5px; }
+        .news-content p { color: #666; font-size: 0.85rem; }
+        .news-date { font-size: 0.7rem; color: #999; margin-top: 5px; }
+        .news-actions { display: flex; gap: 10px; }
+        .edit-btn, .delete-btn { padding: 5px 12px; border-radius: 20px; border: none; cursor: pointer; font-size: 0.75rem; }
+        .edit-btn { background: #ffd966; color: #1b5e20; }
+        .delete-btn { background: #c62828; color: white; }
         @media (max-width: 768px) {
-            .news-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .news-actions {
-                margin-top: 10px;
-            }
+            .news-item { flex-direction: column; align-items: flex-start; }
+            .news-actions { margin-top: 10px; }
         }
     </style>
 </head>
@@ -192,7 +53,7 @@
 <div class="admin-header">
     <div class="container admin-header-flex">
         <div class="admin-logo">
-            <img src="../images/logo.png" alt="KYBDF Logo" onerror=" this.src='https://via.placeholder.com/45?text=KYBDF'">
+            <img src="../images/logo.png" alt="KYBDF Logo" onerror="this.src='https://via.placeholder.com/45?text=KYBDF'">
             <span>KYBDF এডমিন প্যানেল</span>
         </div>
         <div class="admin-user">
@@ -205,14 +66,14 @@
 <div class="admin-nav">
     <div class="container">
         <ul class="admin-nav-menu">
-            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> ড্যাশবোর্ড</a></li>
-            <li><a href="notice.html"><i class="fas fa-bullhorn"></i> নোটিশ</a></li>
-            <li><a href="news.html" class="active"><i class="fas fa-newspaper"></i> নিউজ</a></li>
-            <li><a href="gallery.html"><i class="fas fa-images"></i> গ্যালারি</a></li>
-            <li><a href="videos.html"><i class="fas fa-video"></i> ভিডিও</a></li>
-            <li><a href="members.html"><i class="fas fa-users"></i> সদস্য</a></li>
-            <li><a href="donors.html"><i class="fas fa-tint"></i> রক্তদাতা</a></li>
-            <li><a href="settings.html"><i class="fas fa-cog"></i> সেটিংস</a></li>
+            <li><a href="dashboard.html">ড্যাশবোর্ড</a></li>
+            <li><a href="notice.html">নোটিশ</a></li>
+            <li><a href="news.html" class="active">নিউজ</a></li>
+            <li><a href="gallery.html">গ্যালারি</a></li>
+            <li><a href="videos.html">ভিডিও</a></li>
+            <li><a href="members.html">সদস্য</a></li>
+            <li><a href="donors.html">রক্তদাতা</a></li>
+            <li><a href="settings.html">সেটিংস</a></li>
         </ul>
     </div>
 </div>
@@ -224,6 +85,11 @@
             <div class="form-group"><input type="text" id="newsTitle" placeholder="নিউজের শিরোনাম" required></div>
             <div class="form-group"><textarea id="newsDesc" rows="3" placeholder="নিউজের বিবরণ" required></textarea></div>
             <div class="form-group"><input type="text" id="newsPublisher" placeholder="প্রকাশক" value="কার্যকরী পরিষদ"></div>
+            <div class="form-group">
+                <label>নিউজের ছবি (আপলোড করুন)</label>
+                <input type="file" id="newsImage" accept="image/*" class="file-input">
+                <div id="imagePreview"></div>
+            </div>
             <button type="submit" class="btn-submit"><i class="fas fa-save"></i> নিউজ প্রকাশ করুন</button>
         </form>
     </div>
@@ -235,16 +101,14 @@
 </main>
 
 <script>
-    // এডমিন অথেনটিকেশন চেক (অন্যান্য এডমিন পেজের মত)
+    // এডমিন অথেনটিকেশন
     function checkAdminAuth() {
         if (localStorage.getItem('adminLoggedIn') !== 'true') {
             window.location.href = 'login.html';
         }
-        const adminUsername = localStorage.getItem('adminUsername') || 'admin';
-        document.getElementById('adminName').innerText = adminUsername;
+        document.getElementById('adminName').innerText = localStorage.getItem('adminUsername') || 'admin';
     }
 
-    // লগআউট
     document.getElementById('logoutBtn')?.addEventListener('click', function(e) {
         e.preventDefault();
         localStorage.removeItem('adminLoggedIn');
@@ -252,79 +116,104 @@
         window.location.href = 'login.html';
     });
 
-    // ডিফল্ট ডেমো নিউজ (যদি লোকাল স্টোরেজ খালি থাকে)
+    // ছবি প্রিভিউ
+    document.getElementById('newsImage')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const previewDiv = document.getElementById('imagePreview');
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                previewDiv.innerHTML = `<img src="${ev.target.result}" class="preview-img" alt="প্রিভিউ">`;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewDiv.innerHTML = '';
+        }
+    });
+
+    // ডিফল্ট নিউজ (ছবি সহ)
     const defaultNews = [
         {
             title: "বিনামূল্যে রক্তের গ্রুপ নির্ণয় শিবির অনুষ্ঠিত",
             description: "কলমাকান্দা যুব রক্তদান ফাউন্ডেশনের আয়োজনে সদর উপজেলা স্বাস্থ্য কমপ্লেক্সে বিনামূল্যে রক্তের গ্রুপ নির্ণয় ও স্বাস্থ্য সচেতনতা শিবির অনুষ্ঠিত হয়েছে। এতে ১৫০ জনেরও বেশি মানুষ অংশগ্রহণ করেন।",
             publisher: "কার্যকরী পরিষদ",
-            date: new Date().toLocaleDateString('bn-BD')
+            date: new Date().toLocaleDateString('bn-BD'),
+            image: "https://via.placeholder.com/300x160?text=Blood+Camp"
         },
         {
             title: "মাদকবিরোধী সচেতনতা র্যালি ও আলোচনা সভা",
             description: 'সংগঠনের উদ্যোগে "মাদককে না বলুন, রক্তদানে এগিয়ে আসুন" স্লোগান নিয়ে র্যালি ও আলোচনা সভা অনুষ্ঠিত হয়েছে। জেলা প্রশাসনের সহযোগিতায় এই আয়োজন সফল হয়।',
             publisher: "কার্যকরী পরিষদ",
-            date: new Date().toLocaleDateString('bn-BD')
+            date: new Date().toLocaleDateString('bn-BD'),
+            image: "https://via.placeholder.com/300x160?text=Rally"
         }
     ];
 
-    // নিউজ লোড ফাংশন
     function loadNews() {
         let news = JSON.parse(localStorage.getItem('kybdf_news') || '[]');
-        // লোকাল স্টোরেজ খালি থাকলে ডিফল্ট নিউজ বসিয়ে দাও
         if (news.length === 0) {
             localStorage.setItem('kybdf_news', JSON.stringify(defaultNews));
             news = defaultNews;
         }
-
         const container = document.getElementById('newsList');
         if (!container) return;
-
         if (news.length === 0) {
             container.innerHTML = '<p style="text-align:center; color:#999;">কোনো নিউজ নেই। প্রথম নিউজ যোগ করুন।</p>';
             return;
         }
-
         container.innerHTML = news.map((item, index) => `
-            <div class="news-item" data-id="${index}">
+            <div class="news-item">
+                <img class="news-img" src="${escapeHtml(item.image)}" alt="নিউজ ছবি" onerror="this.src='https://via.placeholder.com/60?text=No+Img'">
                 <div class="news-content">
                     <h4>${escapeHtml(item.title)}</h4>
                     <p>${escapeHtml(item.description)}</p>
                     <div class="news-date"><i class="fas fa-calendar-alt"></i> ${item.date} | <i class="fas fa-user"></i> ${escapeHtml(item.publisher)}</div>
                 </div>
                 <div class="news-actions">
-                    <button class="edit-btn" onclick="editNews(${index})"><i class="fas fa-edit"></i> সম্পাদনা</button>
-                    <button class="delete-btn" onclick="deleteNews(${index})"><i class="fas fa-trash"></i> ডিলিট</button>
+                    <button class="edit-btn" onclick="editNews(${index})"><i class="fas fa-edit"></i></button>
+                    <button class="delete-btn" onclick="deleteNews(${index})"><i class="fas fa-trash"></i></button>
                 </div>
             </div>
         `).join('');
     }
 
-    // নিউজ যোগ করা
+    // নিউজ যোগ (ছবি base64 আকারে সংরক্ষণ)
     document.getElementById('addNewsForm')?.addEventListener('submit', function(e) {
         e.preventDefault();
         const title = document.getElementById('newsTitle').value.trim();
         const description = document.getElementById('newsDesc').value.trim();
         const publisher = document.getElementById('newsPublisher').value.trim() || 'কার্যকরী পরিষদ';
+        const imageFile = document.getElementById('newsImage').files[0];
         if (!title || !description) {
             alert('শিরোনাম ও বিবরণ অবশ্যই পূরণ করতে হবে');
             return;
         }
-
-        const news = JSON.parse(localStorage.getItem('kybdf_news') || '[]');
-        news.unshift({
-            title: title,
-            description: description,
-            publisher: publisher,
-            date: new Date().toLocaleDateString('bn-BD')
-        });
-        localStorage.setItem('kybdf_news', JSON.stringify(news));
-        this.reset();
-        loadNews();
-        alert('নিউজ সফলভাবে যোগ করা হয়েছে!');
+        const processImage = (imgData) => {
+            const news = JSON.parse(localStorage.getItem('kybdf_news') || '[]');
+            news.unshift({
+                title: title,
+                description: description,
+                publisher: publisher,
+                date: new Date().toLocaleDateString('bn-BD'),
+                image: imgData || 'https://via.placeholder.com/300x160?text=News+Image'
+            });
+            localStorage.setItem('kybdf_news', JSON.stringify(news));
+            document.getElementById('addNewsForm').reset();
+            document.getElementById('imagePreview').innerHTML = '';
+            loadNews();
+            alert('নিউজ সফলভাবে যোগ করা হয়েছে!');
+        };
+        if (imageFile) {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                processImage(ev.target.result);
+            };
+            reader.readAsDataURL(imageFile);
+        } else {
+            processImage('');
+        }
     });
 
-    // নিউজ এডিট
     window.editNews = function(index) {
         const news = JSON.parse(localStorage.getItem('kybdf_news') || '[]');
         if (!news[index]) return;
@@ -341,7 +230,6 @@
         }
     };
 
-    // নিউজ ডিলিট
     window.deleteNews = function(index) {
         if (confirm('নিউজটি ডিলিট করতে চান?')) {
             const news = JSON.parse(localStorage.getItem('kybdf_news') || '[]');
@@ -352,18 +240,11 @@
         }
     };
 
-    // HTML এস্কেপ ফাংশন (XSS প্রতিরোধ)
     function escapeHtml(str) {
         if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
+        return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
     }
 
-    // পেজ লোডে অথেনটিকেশন চেক ও নিউজ লোড
     checkAdminAuth();
     loadNews();
 </script>
