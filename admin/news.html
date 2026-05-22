@@ -8,131 +8,53 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-        .news-card {
-            background: linear-gradient(145deg, #ffffff, #fafefa);
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.4s ease;
-        }
-        .news-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.12);
-        }
-        .news-img {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            background-color: #c62828;
-        }
-        .news-content {
-            padding: 22px;
-        }
-        .news-content h3 {
-            color: #1b5e20;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-        .news-content p {
-            color: #555;
-            margin-bottom: 15px;
-            line-height: 1.5;
-            font-size: 0.9rem;
-        }
-        .news-date {
-            font-size: 0.75rem;
-            color: #999;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .read-more {
-            display: inline-block;
-            background: #c62828;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.75rem;
-            transition: 0.2s;
-        }
-        .read-more:hover {
-            background: #1b5e20;
-            transform: translateX(3px);
-        }
-        .empty-state {
-            text-align: center;
-            padding: 60px;
-            color: #999;
-            grid-column: 1 / -1;
-        }
-        .empty-state i {
-            font-size: 60px;
-            margin-bottom: 15px;
-            opacity: 0.5;
-        }
+        .news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;margin:40px 0;}
+        .news-card{background:white;border-radius:30px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,0.05);transition:0.3s;}
+        .news-card:hover{transform:translateY(-8px);box-shadow:0 20px 35px rgba(0,0,0,0.12);}
+        .news-img{height:180px;background-size:cover;background-position:center;background-color:#c62828;}
+        .news-content{padding:22px;}
+        .news-content h3{color:#1b5e20;margin-bottom:10px;}
+        .news-content p{color:#555;margin-bottom:15px;line-height:1.5;}
+        .news-date{font-size:0.75rem;color:#999;display:flex;justify-content:space-between;align-items:center;}
+        .read-more{display:inline-block;background:#c62828;color:white;padding:6px 18px;border-radius:40px;text-decoration:none;font-weight:600;font-size:0.75rem;}
+        .read-more:hover{background:#1b5e20;}
+        .empty-state{text-align:center;padding:60px;color:#999;grid-column:1/-1;}
     </style>
 </head>
 <body class="lang-bn">
-
 <div class="top-header" id="topHeader"></div>
-<div class="logo-social-bar">...</div> <!-- আপনার লোগো ও সোশ্যাল বার -->
-<nav class="navbar">...</nav> <!-- আপনার নেভবার -->
+<div class="logo-social-bar"><div class="container logo-social-flex">...</div></div>
+<nav class="navbar">...</nav>
 
 <main>
     <div class="container">
-        <div class="page-header">
-            <h1>নিউজ ও আপডেট</h1>
-            <p>সর্বশেষ সংবাদ, ইভেন্ট ও সংগঠনের কার্যক্রম</p>
-        </div>
-        
+        <div class="page-header"><h1>নিউজ ও আপডেট</h1><p>সর্বশেষ সংবাদ, ইভেন্ট ও সংগঠনের কার্যক্রম</p></div>
         <div class="news-grid" id="newsGrid"></div>
     </div>
 </main>
 
 <footer class="footer">...</footer>
-
 <script src="../js/script.js"></script>
-<script src="../js/translation.js"></script>
 <script>
-    function loadNews() {
-        let news = JSON.parse(localStorage.getItem('kybdf_news') || '[]');
-        const container = document.getElementById('newsGrid');
-        if (!container) return;
-        
-        if (news.length === 0) {
-            container.innerHTML = `<div class="empty-state"><i class="fas fa-newspaper"></i><p>কোনো নিউজ নেই</p></div>`;
+    function loadNews(){
+        let news=JSON.parse(localStorage.getItem('kybdf_news')||'[]');
+        const container=document.getElementById('newsGrid');
+        if(!news.length){
+            container.innerHTML='<div class="empty-state"><i class="fas fa-newspaper"></i><p>কোনো নিউজ নেই</p></div>';
             return;
         }
-        
-        container.innerHTML = news.map(item => `
+        container.innerHTML=news.map(item=>`
             <div class="news-card">
-                <div class="news-img" style="background-image: url('${escapeHtml(item.image)}'); background-size: cover; background-position: center;"></div>
+                <div class="news-img" style="background-image:url('${escapeHtml(item.image||'https://via.placeholder.com/400x180?text=News')}');"></div>
                 <div class="news-content">
                     <h3>${escapeHtml(item.title)}</h3>
-                    <p>${escapeHtml(item.description)}</p>
-                    <div class="news-date">
-                        <span><i class="fas fa-calendar-alt"></i> ${item.date}</span>
-                        ${item.link ? `<a href="${escapeHtml(item.link)}" target="_blank" class="read-more">বিস্তারিত পড়ুন →</a>` : ''}
-                    </div>
+                    <p>${escapeHtml(item.desc)}</p>
+                    <div class="news-date"><span><i class="fas fa-calendar-alt"></i> ${item.date}</span><a href="${escapeHtml(item.link)}" target="_blank" class="read-more">বিস্তারিত পড়ুন →</a></div>
                 </div>
             </div>
         `).join('');
     }
-    
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
-    }
-    
+    function escapeHtml(str){if(!str)return '';return str.replace(/[&<>]/g,m=>m==='&'?'&amp;':m==='<'?'&lt;':'&gt;');}
     loadNews();
 </script>
 </body>
